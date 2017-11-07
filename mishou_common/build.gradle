@@ -32,6 +32,7 @@ dependencies {
     compile rootProject.ext.dependencies["support-v4"]
     compile rootProject.ext.dependencies["support-v7"]
     compile rootProject.ext.dependencies["annotaations"]
+    compile rootProject.ext.dependencies["recyclerview"]
 
     compile rootProject.ext.dependencies["retrofit"]
     compile rootProject.ext.dependencies["converter_gson"]
