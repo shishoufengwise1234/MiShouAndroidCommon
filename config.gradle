@@ -90,6 +90,12 @@ ext {
             //数据库
             "greendao"               : 'org.greenrobot:greendao:3.2.0',
 
+
+
+            //--------------------第三方服务厂商相关SDK---------------------------------------
+            //友盟统计
+            "umeng-analytics": 'com.umeng.analytics:analytics:latest.integration',
+
     ]
 
 
