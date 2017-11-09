@@ -27,14 +27,38 @@ public interface BaseImageLoaderStrategy {
     /**
      * 简单加载图片
      *
+     * @param context   上下文对象
+     * @param url       图片地址
+     * @param imageView img
+     * @param width     宽
+     * @param height    高
+     */
+    void loadImage(@NonNull Context context, @NonNull String url, @NonNull ImageView imageView, int width, int height);
+
+    /**
+     * 简单加载图片
+     *
      * @param context     上下文对象
      * @param url         图片地址
      * @param placeholder 加载显示图
-     * @param errorRes 失败图
+     * @param errorRes    失败图
      * @param imageView   img
      */
     void loadImage(@NonNull Context context, @NonNull String url, @DrawableRes int placeholder,
                    @DrawableRes int errorRes, @NonNull ImageView imageView);
+
+    /**
+     * 简单加载图片
+     *
+     * @param context     上下文对象
+     * @param url         图片地址
+     * @param placeholder 加载显示图
+     * @param errorRes    失败图
+     * @param fallback    备选图
+     * @param imageView   img
+     */
+    void loadImage(@NonNull Context context, @NonNull String url, @DrawableRes int placeholder,
+                   @DrawableRes int errorRes, @DrawableRes int fallback, @NonNull ImageView imageView);
 
     /**
      * 简单加载 GIF 图片
@@ -52,21 +76,73 @@ public interface BaseImageLoaderStrategy {
      * @param context     上下文对象
      * @param url         图片地址
      * @param placeholder 加载显示图
-     * @param errorRes 失败图
+     * @param errorRes    失败图
      * @param imageView   img
      */
     void loadGifImage(@NonNull Context context, @NonNull String url, @DrawableRes int placeholder,
                       @DrawableRes int errorRes, @NonNull ImageView imageView);
 
+
     /**
+     * 加载缩略图
      *
-     *清除硬盘缓存
-     * @param context  context
+     * @param context   上下文对象
+     * @param url       图片地址
+     * @param imageView img
+     */
+    void loadThumbnailImage(@NonNull Context context, @NonNull String url,@DrawableRes int placeholder,
+                            @DrawableRes int errorRes, @DrawableRes int fallback,
+                            @NonNull ImageView imageView,float sizeMultiplier);
+
+
+
+
+    /**
+     * 简单加载图片
+     *
+     * @param context     上下文对象
+     * @param url         图片地址
+     * @param placeholder 加载显示图
+     * @param errorRes    失败图
+     * @param fallback    备选图
+     * @param imageView   img
+     */
+    void loadFitCenterImage(@NonNull Context context, @NonNull String url, @DrawableRes int placeholder,
+                   @DrawableRes int errorRes, @DrawableRes int fallback, @NonNull ImageView imageView);
+    /**
+     * 简单加载图片
+     *
+     * @param context     上下文对象
+     * @param url         图片地址
+     * @param placeholder 加载显示图
+     * @param errorRes    失败图
+     * @param fallback    备选图
+     * @param imageView   img
+     */
+    void loadCenterCropImage(@NonNull Context context, @NonNull String url, @DrawableRes int placeholder,
+                   @DrawableRes int errorRes, @DrawableRes int fallback, @NonNull ImageView imageView);
+    /**
+     * 简单加载图片
+     *
+     * @param context     上下文对象
+     * @param url         图片地址
+     * @param placeholder 加载显示图
+     * @param errorRes    失败图
+     * @param fallback    备选图
+     * @param imageView   img
+     */
+    void loadCenterInsideImage(@NonNull Context context, @NonNull String url, @DrawableRes int placeholder,
+                   @DrawableRes int errorRes, @DrawableRes int fallback, @NonNull ImageView imageView);
+    /**
+     * 清除硬盘缓存
+     *
+     * @param context context
      */
     void clearImageDiskCache(@NonNull Context context);
 
     /**
      * 清除内存缓存
+     *
      * @param context context
      */
     void clearImageMemoryCache(@NonNull Context context);
@@ -76,6 +152,7 @@ public interface BaseImageLoaderStrategy {
 
     /**
      * 获取缓存大小
+     *
      * @param context context
      * @return 缓存值
      */
