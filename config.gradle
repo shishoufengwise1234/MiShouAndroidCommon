@@ -42,12 +42,12 @@ ext {
             "multidex"               : 'com.android.support:multidex:1.0.1',
 
             //view bind
-            "butterknife"            : 'com.jakewharton:butterknife:8.6.0',
-            "butterknife_apt"        : 'com.jakewharton:butterknife-compiler:8.6.0',
+            "butterknife"            : 'com.jakewharton:butterknife:8.2.1',
+            "butterknife_apt"        : 'com.jakewharton:butterknife-compiler:8.2.1',
 
             //图片加载
-            "glide"                  : 'com.github.bumptech.glide:glide:4.0.0-RC0',
-            "glide-compiler"         : 'com.github.bumptech.glide:compiler:4.0.0-RC0',
+            "glide"                  : 'com.github.bumptech.glide:glide:4.3.1',
+            "glide-compiler"         : 'com.github.bumptech.glide:compiler:4.3.1',
             //下载picasso源码  maven私服aar文件
 //            "picasso"               : 'com.squareup.picasso:picasso:2.5.3@aar',
             "picasso"                : 'com.squareup.picasso:picasso:2.5.2',
@@ -89,6 +89,10 @@ ext {
 
             //数据库
             "greendao"               : 'org.greenrobot:greendao:3.2.0',
+
+
+            //图片选择器
+            "matisse":'com.zhihu.android:matisse:0.5.0-alpha4',
 
 
 

@@ -15,9 +15,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
-
-import com.chefu.b2b.qifuyun_android.widget.assist.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

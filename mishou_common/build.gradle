@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+//apply plugin: 'android-apt'
+
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -41,8 +44,14 @@ dependencies {
     compile rootProject.ext.dependencies["rxjava2-adapter"]
     compile rootProject.ext.dependencies["rxlifecycle2"]
     compile rootProject.ext.dependencies["rxlifecycle2-components"]
+
     compile rootProject.ext.dependencies["butterknife"]
-    compile rootProject.ext.dependencies["butterknife_apt"]
+    annotationProcessor rootProject.ext.dependencies["butterknife_apt"]
+
+    compile rootProject.ext.dependencies["matisse"]
+
+    compile rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
 
 
 

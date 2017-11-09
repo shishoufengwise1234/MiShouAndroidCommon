@@ -16,7 +16,7 @@ import java.util.Set;
 public class SharedPreferencesUtils {
 
 
-    public static final String DEFAULT_FILE_NAME = "qifuyun";
+    public static final String DEFAULT_FILE_NAME = "ms_nursing";
     /**
      * 保存用户其他信息，保存城市信息，是否第一次安装
      */

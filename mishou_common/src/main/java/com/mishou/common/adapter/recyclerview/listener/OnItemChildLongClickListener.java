@@ -2,7 +2,8 @@ package com.mishou.common.adapter.recyclerview.listener;
 
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.mishou.common.adapter.recyclerview.BaseQuickAdapter;
+
 
 /**
  * Created by AllenCoder on 2016/8/03.
