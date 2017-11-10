@@ -36,8 +36,8 @@ public class ImageLoaderActivity extends BaseAppcompatActivity {
     @Override
     protected void initView() {
 
-        ImageLoader.getInstance().loadImage(ImageLoaderActivity.this,"",imgPic);
-
+        ImageLoader.getInstance()
+                .loadImage(ImageLoaderActivity.this,"http://img5.imgtn.bdimg.com/it/u=49366202,632101467&fm=27&gp=0.jpg",imgPic);
 
     }
 

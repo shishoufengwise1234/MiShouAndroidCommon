@@ -16,6 +16,14 @@ public interface BaseImageLoaderStrategy {
 
 
     /**
+     * 是否开启debug 模式
+     *
+     * @param isDebug true is debug
+     */
+    void setDebug(Context context, boolean isDebug);
+
+
+    /**
      * 简单加载图片
      *
      * @param context   上下文对象
@@ -90,11 +98,9 @@ public interface BaseImageLoaderStrategy {
      * @param url       图片地址
      * @param imageView img
      */
-    void loadThumbnailImage(@NonNull Context context, @NonNull String url,@DrawableRes int placeholder,
+    void loadThumbnailImage(@NonNull Context context, @NonNull String url, @DrawableRes int placeholder,
                             @DrawableRes int errorRes, @DrawableRes int fallback,
-                            @NonNull ImageView imageView,float sizeMultiplier);
-
-
+                            @NonNull ImageView imageView, float sizeMultiplier);
 
 
     /**
@@ -108,7 +114,8 @@ public interface BaseImageLoaderStrategy {
      * @param imageView   img
      */
     void loadFitCenterImage(@NonNull Context context, @NonNull String url, @DrawableRes int placeholder,
-                   @DrawableRes int errorRes, @DrawableRes int fallback, @NonNull ImageView imageView);
+                            @DrawableRes int errorRes, @DrawableRes int fallback, @NonNull ImageView imageView);
+
     /**
      * 简单加载图片
      *
@@ -120,7 +127,8 @@ public interface BaseImageLoaderStrategy {
      * @param imageView   img
      */
     void loadCenterCropImage(@NonNull Context context, @NonNull String url, @DrawableRes int placeholder,
-                   @DrawableRes int errorRes, @DrawableRes int fallback, @NonNull ImageView imageView);
+                             @DrawableRes int errorRes, @DrawableRes int fallback, @NonNull ImageView imageView);
+
     /**
      * 简单加载图片
      *
@@ -132,7 +140,21 @@ public interface BaseImageLoaderStrategy {
      * @param imageView   img
      */
     void loadCenterInsideImage(@NonNull Context context, @NonNull String url, @DrawableRes int placeholder,
-                   @DrawableRes int errorRes, @DrawableRes int fallback, @NonNull ImageView imageView);
+                               @DrawableRes int errorRes, @DrawableRes int fallback, @NonNull ImageView imageView);
+
+    /**
+     * 加载圆形图片
+     *
+     * @param context     上下文对象
+     * @param url         图片地址
+     * @param placeholder 加载显示图
+     * @param errorRes    失败图
+     * @param fallback    备选图
+     * @param imageView   img
+     */
+    void loadCircleImage(@NonNull Context context, @NonNull String url, @DrawableRes int placeholder,
+                         @DrawableRes int errorRes, @DrawableRes int fallback, @NonNull ImageView imageView);
+
     /**
      * 清除硬盘缓存
      *
@@ -147,7 +169,9 @@ public interface BaseImageLoaderStrategy {
      */
     void clearImageMemoryCache(@NonNull Context context);
 
-    //根据不同的内存状态，来响应不同的内存释放策略
+    /**
+     * 根据不同的内存状态，来响应不同的内存释放策略
+     */
     void trimMemory(Context context, int level);
 
     /**

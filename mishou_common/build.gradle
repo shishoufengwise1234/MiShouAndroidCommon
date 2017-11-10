@@ -1,10 +1,11 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
-//apply plugin: 'android-apt'
+//apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'android-apt'
 
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -26,7 +27,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 
 //    testCompile rootProject.ext.dependencies["testjuit"]
 //    androidTestImplementation rootProject.ext.dependencies["test-runner"]
@@ -46,9 +47,11 @@ dependencies {
     compile rootProject.ext.dependencies["rxlifecycle2-components"]
 
     compile rootProject.ext.dependencies["butterknife"]
-    annotationProcessor rootProject.ext.dependencies["butterknife_apt"]
+    compile rootProject.ext.dependencies["butterknife_apt"]
 
     compile rootProject.ext.dependencies["matisse"]
+
+    compile rootProject.ext.dependencies["logger"]
 
     compile rootProject.ext.dependencies["glide"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
