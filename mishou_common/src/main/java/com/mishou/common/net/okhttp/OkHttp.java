@@ -72,8 +72,8 @@ public class OkHttp {
         }
 
         okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new HeaderInterceptor())   //自定义header
-                .addInterceptor(new TokenInterceptor())  //自定义token拦截器
+//                .addInterceptor(new HeaderInterceptor())   //自定义header
+//                .addInterc、eptor(new TokenInterceptor())  //自定义token拦截器
                 .addInterceptor(new HttpLoggerInterceptor()) //自定义 logger 拦截器
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
