@@ -1,4 +1,4 @@
-package com.mishou.common.ui;
+package com.mishou.common.manager;
 
 import android.app.Activity;
 import android.support.annotation.Nullable;

@@ -29,8 +29,11 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-//    testCompile rootProject.ext.dependencies["testjuit"]
-//    androidTestImplementation rootProject.ext.dependencies["test-runner"]
+    testCompile rootProject.ext.dependencies["testjuit"]
+    testCompile rootProject.ext.dependencies["test-runner"]
+    testCompile rootProject.ext.dependencies["espresso"]
+    testCompile rootProject.ext.dependencies["rules"]
+    testCompile rootProject.ext.dependencies["uiautomator"]
 
 
     compile rootProject.ext.dependencies["support-v4"]

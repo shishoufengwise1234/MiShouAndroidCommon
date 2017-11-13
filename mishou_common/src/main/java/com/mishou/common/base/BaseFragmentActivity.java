@@ -1,17 +1,19 @@
-package com.mishou.common.ui.base;
+package com.mishou.common.base;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.util.Log;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.Window;
 
 import com.mishou.common.BuildConfig;
-import com.mishou.common.ui.ActivityManager;
+import com.mishou.common.manager.ActivityManager;
+import com.mishou.common.utils.LogUtils;
 import com.trello.rxlifecycle2.components.support.RxFragmentActivity;
 import com.umeng.analytics.MobclickAgent;
 
@@ -19,15 +21,24 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by xingzhezuomeng on 16/8/8.
+ * Created by ${shishoufeng} on 17/11/13.
+ * email:shishoufeng1227@126.com
+ *
+ * activity 基类
+ *
  */
 public abstract class BaseFragmentActivity extends RxFragmentActivity {
 
     private static final String TAG = "BaseFragmentActivity";
 
+    //打印子类 类名 快速定位
+    private String className = this.getClass().getSimpleName();
+
+    protected Activity mActivity = null;
+
     protected Resources mResources = null;
 
-    public Context mContext = null;
+    public Context mContext;
 
     private Unbinder unbinder;
 
@@ -36,12 +47,13 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d(TAG, "onCreate: "+this.getClass().getSimpleName());
+        LogUtils.d(TAG, "onCreate: "+className);
 
-        mContext = this;
         initWindow();
 
-        setContentLayout(savedInstanceState);
+        mContext = this;
+
+        setContentView(getLayoutView());
 
         ActivityManager.getActivityManager().addActivity(this);
 
@@ -49,7 +61,7 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity {
 
         mResources = getResources();
 
-        initView();
+        initView(savedInstanceState);
 
         setOnListener();
 
@@ -63,24 +75,24 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity {
 
     }
 
-    protected void initWindow() {
-
+    protected void initWindow(){
         //去除title
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
     }
 
-    /**
-     * 初始化view
-     *
-     * @return
+    /***
+     * 加载view
+     * @return view layoutRes
      */
-    protected abstract void setContentLayout(Bundle savedInstanceState);
+    protected abstract int getLayoutView();
+
 
     /**
      * 初始化相关view
+     * @param savedInstanceState bundle 数据
      */
-    protected abstract void initView();
+    protected abstract void initView(@Nullable Bundle savedInstanceState);
 
     /**
      * 为view 设置监听事件
@@ -92,6 +104,7 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity {
      */
     protected abstract void initData();
 
+
     /***
      * 初始化view
      *
@@ -100,7 +113,7 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity {
      * @return
      */
     protected <T extends View> T getViewById(@IdRes int viewId) {
-        return ButterKnife.findById(this, viewId);
+        return this.findViewById(viewId);
     }
 
     /***
@@ -112,7 +125,7 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity {
      * @return
      */
     protected <T extends View> T getViewById(@NonNull View view, @IdRes int viewId) {
-        return ButterKnife.findById(view, viewId);
+        return view.findViewById(viewId);
     }
 
     /***
@@ -124,13 +137,15 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity {
      * @return
      */
     protected <T extends View> T getViewById(@NonNull Dialog dialog, @IdRes int viewId) {
-        return ButterKnife.findById(dialog, viewId);
+        return dialog.findViewById(viewId);
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
+        LogUtils.d(TAG, "onStart: "+className);
+        mActivity = this;
 
     }
 
@@ -138,19 +153,26 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity {
     protected void onRestart() {
         super.onRestart();
 
+        LogUtils.d(TAG, "onReStart: "+className);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        LogUtils.d(TAG, "onResume: "+className);
+
         if (!BuildConfig.DEBUG) {
             MobclickAgent.onResume(mContext);
         }
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+        LogUtils.d(TAG, "onPause: "+className);
+
         if (!BuildConfig.DEBUG) {
             MobclickAgent.onPause(mContext);
         }
@@ -160,11 +182,15 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity {
     protected void onStop() {
         super.onStop();
 
+        LogUtils.d(TAG, "onStop: "+className);
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        LogUtils.d(TAG, "onDestroy: "+className);
 
         if (unbinder != null) unbinder.unbind();
 

@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.mishou.common.demo.R;
 import com.mishou.common.image.ImageLoader;
-import com.mishou.common.ui.base.BaseAppcompatActivity;
+import com.mishou.common.base.BaseAppcompatActivity;
 import com.mishou.common.utils.ToastUtils;
 
 import butterknife.BindView;
