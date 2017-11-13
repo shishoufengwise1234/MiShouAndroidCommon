@@ -545,6 +545,8 @@ public class BaseWebView extends WebView {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+
+        //回收资源
         this.destroy();
     }
 
