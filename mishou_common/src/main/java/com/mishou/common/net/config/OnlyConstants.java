@@ -1,4 +1,4 @@
-package com.mishou.common.net;
+package com.mishou.common.net.config;
 
 /**
  * Created by ${shishoufeng} on 17/11/15.

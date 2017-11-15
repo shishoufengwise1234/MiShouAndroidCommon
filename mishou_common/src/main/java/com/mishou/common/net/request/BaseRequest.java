@@ -239,6 +239,10 @@ public abstract class BaseRequest<R extends BaseRequest> {
         this.baseParams.put(key, value);
         return (R) this;
     }
+    public R addParams(Map<String,String> map){
+        this.baseParams.putAll(map);
+        return (R) this;
+    }
 
     public R removeParams(String key) {
         this.baseParams.remove(key);

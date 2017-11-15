@@ -1,6 +1,6 @@
 package com.mishou.common.net.function;
 
-import com.mishou.common.net.OnlyConstants;
+import com.mishou.common.net.config.OnlyConstants;
 import com.mishou.common.net.exception.ApiException;
 import com.mishou.common.net.util.OnlyLog;
 

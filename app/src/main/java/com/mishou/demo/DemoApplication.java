@@ -19,11 +19,7 @@ public class DemoApplication extends BaseApplication {
     protected void onAttach(Context base) {
 
 
-        OnlyHttp.getInstance()
-                .setBaseUrl("")
-                .debug(null,true)
-                .addInterceptor(null)
-                .addNetworkInterceptor(null);
+
 
     }
 
@@ -33,6 +29,13 @@ public class DemoApplication extends BaseApplication {
         callbacks = new ActivityLifecycleCallback();
 
         registerActivityLifecycleCallbacks(callbacks);
+
+        OnlyHttp.getInstance()
+                .init(mContext)
+                .setBaseUrl("")
+                .debug(null,true)
+                .addInterceptor(null)
+                .addNetworkInterceptor(null);
 
     }
 

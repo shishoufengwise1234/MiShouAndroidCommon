@@ -93,8 +93,9 @@ public class OnlyHttp {
      * 建议放到 application 中
      * @param context  context
      */
-    public void init(Context context){
+    public OnlyHttp init(Context context){
         this.mContext = OnlyUtils.checkNotNull(context,"context is null");
+        return this;
     }
 
     public Context getContext(){

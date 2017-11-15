@@ -7,6 +7,9 @@ import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 /**
  * Created by ${shishoufeng} on 17/11/14.
  * email:shishoufeng1227@126.com
@@ -42,5 +45,20 @@ public class OnlyUtils {
         NetworkInfo info = manager.getActiveNetworkInfo();
 
         return !(null == info || !info.isAvailable());
+    }
+
+    public static void close(Closeable close) {
+        if (close != null) {
+            try {
+                closeThrowException(close);
+            } catch (IOException ignored) {
+            }
+        }
+    }
+
+    public static void closeThrowException(Closeable close) throws IOException {
+        if (close != null) {
+            close.close();
+        }
     }
 }

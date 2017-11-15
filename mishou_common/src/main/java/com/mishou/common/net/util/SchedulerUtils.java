@@ -89,8 +89,7 @@ public class SchedulerUtils {
      * UI 线程发送数据 并订阅事件
      * 添加结果异常转换
      *
-     * @param <T>
-     * @return
+     * @return ObservableTransformer
      */
     public static <T> ObservableTransformer<ApiResult<T>, T> main() {
         return new ObservableTransformer<ApiResult<T>, T>() {

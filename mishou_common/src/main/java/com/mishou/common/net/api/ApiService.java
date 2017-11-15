@@ -25,10 +25,10 @@ import retrofit2.http.Url;
 /**
  * Created by ${shishoufeng} on 17/11/14.
  * email:shishoufeng1227@126.com
- *
- *
+ * <p>
+ * <p>
  * API service 基本访问方法
- *
+ * <p>
  * 1、减少API service 增加而代码产生冗余
  * 2、降低耦合
  * 3、隔离业务层
@@ -41,6 +41,13 @@ public interface ApiService {
     @FormUrlEncoded
     Observable<ResponseBody> post(@Url String url, @FieldMap Map<String, String> maps);
 
+    /**
+     * 传输 封装类型数据
+     * 其中 对象数据是被转换成 json 数据
+     * @param url
+     * @param object
+     * @return
+     */
     @POST()
     Observable<ResponseBody> postBody(@Url String url, @Body Object object);
 
@@ -65,6 +72,12 @@ public interface ApiService {
     @POST()
     Observable<ResponseBody> uploadFiles(@Url String url, @PartMap() Map<String, RequestBody> maps);
 
+    /**
+     * 采用 MultipartBody.Part 上传文件
+     * @param url
+     * @param parts
+     * @return
+     */
     @Multipart
     @POST()
     Observable<ResponseBody> uploadFiles(@Url String url, @Part() List<MultipartBody.Part> parts);
@@ -73,10 +86,22 @@ public interface ApiService {
     @GET
     Observable<ResponseBody> downloadFile(@Url String fileUrl);
 
+    /**
+     * 发送json 数据
+     * @param url
+     * @param jsonBody
+     * @return
+     */
     @POST()
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     Observable<ResponseBody> postJson(@Url String url, @Body RequestBody jsonBody);
 
+    /**
+     * 自定义请求
+     * @param url
+     * @param body
+     * @return
+     */
     @POST()
     Observable<ResponseBody> postBody(@Url String url, @Body RequestBody body);
 }

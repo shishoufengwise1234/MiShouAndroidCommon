@@ -5,7 +5,7 @@ import android.net.ParseException;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializer;
 import com.google.gson.JsonSyntaxException;
-import com.mishou.common.net.OnlyConstants;
+import com.mishou.common.net.config.OnlyConstants;
 import com.mishou.common.net.model.ApiResult;
 
 import org.apache.http.conn.ConnectTimeoutException;

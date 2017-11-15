@@ -19,12 +19,12 @@ import okhttp3.ResponseBody;
 /**
  * Created by ${shishoufeng} on 17/11/14.
  * email:shishoufeng1227@126.com
- *
- *
+ * <p>
+ * <p>
  * get 请求
  */
 
-public class GetRequest extends BaseRequest<GetRequest>{
+public class GetRequest extends BaseRequest<GetRequest> {
 
 
     public GetRequest(String url) {
@@ -32,8 +32,7 @@ public class GetRequest extends BaseRequest<GetRequest>{
     }
 
     public <T> Observable<T> execute(Class<T> clazz) {
-
-        return this.execute(new CallClazzProxy<ApiResult<T> , T>(clazz));
+        return this.execute(new CallClazzProxy<ApiResult<T>, T>(clazz));
     }
 
     public <T> Observable<T> execute(Type type) {
@@ -41,11 +40,19 @@ public class GetRequest extends BaseRequest<GetRequest>{
         });
     }
 
+    /**
+     * 发起请求
+     *
+     * @param proxy 代理类
+     * @param <T>   返回对象
+     * @return Observable
+     */
     public <T> Observable<T> execute(CallClazzProxy<? extends ApiResult<T>, T> proxy) {
         return create().createObservable()
-                .map(new ApiResultFunction<T>(null,proxy.getType()))
+                .map(new ApiResultFunction<T>(null, proxy.getType()))
                 .compose(isSyncRequest ? SchedulerUtils.<T>main() : SchedulerUtils.<T>io_main())
-                .retryWhen(new RetryFunction(retryCount,retryDelay,retryIncreaseDelay));
+                .retryWhen(new RetryFunction(retryCount, retryDelay, retryIncreaseDelay));
+
     }
 
     public <T> Disposable execute(CallBack<T> callBack) {
@@ -53,6 +60,12 @@ public class GetRequest extends BaseRequest<GetRequest>{
         });
     }
 
+    /**
+     * 发起请求
+     * @param proxy 代理类
+     * @param <T>   返回对象
+     * @return Disposable
+     */
     public <T> Disposable execute(CallBackProxy<? extends ApiResult<T>, T> proxy) {
 
         return toObservable(createObservable(),proxy).subscribeWith(new CallBackSubscriber<T>(baseContext,proxy.getCallBack()));
@@ -74,6 +87,6 @@ public class GetRequest extends BaseRequest<GetRequest>{
 
     @Override
     protected Observable<ResponseBody> createObservable() {
-        return apiService.get(url,baseParams);
+        return apiService.get(url, baseParams);
     }
 }
