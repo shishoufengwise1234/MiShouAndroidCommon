@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.mishou.common.net.file.download.FileResponseBody;
+import com.mishou.common.net.interceptor.HttpLoggerInterceptor;
 
 import java.io.File;
 import java.io.IOException;
@@ -74,7 +75,7 @@ public class OkHttp {
         okHttpClient = new OkHttpClient.Builder()
 //                .addInterceptor(new HeaderInterceptor())   //自定义header
 //                .addInterc、eptor(new TokenInterceptor())  //自定义token拦截器
-                .addInterceptor(new HttpLoggerInterceptor()) //自定义 logger 拦截器
+                .addInterceptor(new HttpLoggerInterceptor(null,true)) //自定义 logger 拦截器
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)

@@ -19,6 +19,7 @@ import java.io.IOException;
 
 public class NullStringToEmptyAdapterFactory<T> implements TypeAdapterFactory {
 
+    @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
 
         Class<T> rawType = (Class<T>) type.getRawType();
@@ -29,6 +30,8 @@ public class NullStringToEmptyAdapterFactory<T> implements TypeAdapterFactory {
     }
 
     public static class StringAdapter extends TypeAdapter<String> {
+
+        @Override
         public String read(JsonReader reader) throws IOException {
             if (reader.peek() == JsonToken.NULL) {
                 reader.nextNull();
@@ -36,6 +39,8 @@ public class NullStringToEmptyAdapterFactory<T> implements TypeAdapterFactory {
             }
             return reader.nextString();
         }
+
+        @Override
         public void write(JsonWriter writer, String value) throws IOException {
             if (value == null) {
                 writer.nullValue();

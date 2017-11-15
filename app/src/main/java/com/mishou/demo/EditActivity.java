@@ -1,6 +1,7 @@
 package com.mishou.demo;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,13 +25,14 @@ public class EditActivity extends BaseAppcompatActivity {
     @BindView(R.id.btn_check)
     Button btnCheck;
 
+
     @Override
-    protected void setContentLayout(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_edit);
+    protected int getLayoutView() {
+        return R.layout.activity_edit;
     }
 
     @Override
-    protected void initView() {
+    protected void initView(@Nullable Bundle savedInstanceState) {
 
     }
 

@@ -1,9 +1,15 @@
-package com.mishou.common.net.okhttp;
+package com.mishou.common.net.interceptor;
 
+import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
+
+import com.mishou.common.utils.LogUtils;
 import com.orhanobut.logger.Logger;
 
 import java.io.EOFException;
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.concurrent.TimeUnit;
@@ -29,17 +35,73 @@ import okio.BufferedSource;
 
 public class HttpLoggerInterceptor implements Interceptor{
 
-    private static final String TAG = "OKHttp";
+    private static final String TAG = "OkHttp";
 
     private static final Charset UTF8 = Charset.forName("UTF-8");
 
+    private String tag;
+    private boolean isPrint = false;
+
+    private int level = NONE;
+
+    /**不打印日志*/
+    public static final int NONE = 1;
+    /**打印body日志*/
+    public static final int BODY = 3;
+
+    //log 输出等级
+    @IntDef({NONE,BODY})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Level{}
+
+    /**
+     * 设置打印级别
+     * @param level 级别
+     */
+    public void setLevel(@Level int level){
+        this.level = level;
+    }
+
+    public HttpLoggerInterceptor (@NonNull String tag, boolean isPrint){
+        if (tag == null){
+            this.tag = TAG;
+        }else{
+            this.tag = tag;
+        }
+        this.isPrint = isPrint;
+    }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
 
+        Request request = chain.request();
+
+        if (isPrint){
+
+            if (level == NONE){ //不打印日志
+                LogUtils.d("HttpLoggerInterceptor level = NONE"+level);
+
+                return chain.proceed(request);
+            }else{
+
+                return printHttpLog(request,chain);
+            }
+        }else{
+            return chain.proceed(request);
+        }
+    }
+
+    /**
+     * 打印log
+     * @param request
+     * @param chain
+     * @return
+     * @throws IOException
+     */
+    private Response printHttpLog(Request request,Chain chain) throws IOException{
+
         //log 信息
         StringBuilder builder = new StringBuilder();
-        Request request = chain.request();
 
         RequestBody requestBody = request.body();
         boolean hasRequestBody = requestBody != null;
@@ -147,9 +209,8 @@ public class HttpLoggerInterceptor implements Interceptor{
             throw e;
         }
 
-        Logger.t(TAG).d("请求信息如下:\n" + builder);
+        Logger.t(tag).d("请求信息如下:\n" + builder);
 
-//        Log.d(TAG,builder.toString());
         return response;
     }
 
