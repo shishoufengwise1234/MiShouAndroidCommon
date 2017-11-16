@@ -38,6 +38,13 @@ import retrofit2.http.Url;
 public interface ApiService {
 
 
+    /**
+     * post 普通请求
+     *
+     * @param url  地址
+     * @param maps 参数 map
+     * @return Observable
+     */
     @POST()
     @FormUrlEncoded
     Observable<ResponseBody> post(@Url String url, @FieldMap Map<String, String> maps);
@@ -45,39 +52,72 @@ public interface ApiService {
     /**
      * 传输 封装类型数据
      * 其中 对象数据是被转换成 json 数据
-     * @param url
-     * @param object
-     * @return
+     *
+     * @param url    地址
+     * @param object class对象
+     * @return Observable
      */
     @POST()
     Observable<ResponseBody> postBody(@Url String url, @Body Object object);
 
+    /**
+     * get 请求
+     *
+     * @param url  地址
+     * @param maps 参数
+     * @return Observable
+     */
     @GET()
     Observable<ResponseBody> get(@Url String url, @QueryMap Map<String, String> maps);
 
+    /**
+     * delete 请求
+     *
+     * @param url  地址
+     * @param maps 参数
+     * @return Observable
+     */
     @DELETE()
     Observable<ResponseBody> delete(@Url String url, @QueryMap Map<String, String> maps);
 
+    /**
+     * put 简单请求
+     *
+     * @param url  地址
+     * @param maps 参数
+     * @return Observable
+     */
     @PUT()
     Observable<ResponseBody> put(@Url String url, @QueryMap Map<String, String> maps);
 
+    /**
+     * post 请求 发送对象
+     *
+     * @param url    地址
+     * @param object class 对象
+     * @return Observable
+     */
     @POST()
     Observable<ResponseBody> putBody(@Url String url, @Body Object object);
 
-    @Multipart
-    @POST()
-    Observable<ResponseBody> uploadFlie(@Url String fileUrl, @Part("description") RequestBody description,
-                                        @Part("files") MultipartBody.Part file);
 
+    /**
+     * 上传文件
+     *
+     * @param url  地址
+     * @param maps 参数
+     * @return Observable
+     */
     @Multipart
     @POST()
     Observable<ResponseBody> uploadFiles(@Url String url, @PartMap() Map<String, RequestBody> maps);
 
     /**
      * 采用 MultipartBody.Part 上传文件
-     * @param url
-     * @param parts
-     * @return
+     *
+     * @param url   地址
+     * @param parts MultipartBody.Part
+     * @return Observable
      */
     @Multipart
     @POST()
@@ -85,8 +125,9 @@ public interface ApiService {
 
     /**
      * 下载文件
-     * @param fileUrl
-     * @return
+     *
+     * @param fileUrl 文件地址
+     * @return call
      */
     @Streaming
     @GET
@@ -94,9 +135,10 @@ public interface ApiService {
 
     /**
      * 发送json 数据
-     * @param url
-     * @param jsonBody
-     * @return
+     *
+     * @param url      地址
+     * @param jsonBody json 请求体
+     * @return Observable
      */
     @POST()
     @Headers({"Content-Type: application/json", "Accept: application/json"})
@@ -104,9 +146,10 @@ public interface ApiService {
 
     /**
      * 自定义请求
-     * @param url
-     * @param body
-     * @return
+     *
+     * @param url  地址
+     * @param body 请求体
+     * @return Observable
      */
     @POST()
     Observable<ResponseBody> postBody(@Url String url, @Body RequestBody body);

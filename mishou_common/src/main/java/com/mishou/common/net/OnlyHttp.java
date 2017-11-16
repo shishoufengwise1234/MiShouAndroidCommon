@@ -7,9 +7,11 @@ import android.text.TextUtils;
 import com.mishou.common.net.https.HttpsUtils;
 import com.mishou.common.net.interceptor.HttpLoggerInterceptor;
 import com.mishou.common.net.request.CustomRequest;
+import com.mishou.common.net.request.DeleteRequest;
 import com.mishou.common.net.request.DownloadRequest;
 import com.mishou.common.net.request.GetRequest;
 import com.mishou.common.net.request.PostRequest;
+import com.mishou.common.net.request.PutRequest;
 import com.mishou.common.net.util.OnlyLog;
 import com.mishou.common.net.util.OnlyUtils;
 
@@ -382,6 +384,22 @@ public class OnlyHttp {
         return new PostRequest(url);
     }
 
+    /**
+     * delete 请求
+     */
+    public static DeleteRequest delete(@NonNull String url){
+        return new DeleteRequest(url);
+    }
+
+    /**
+     * put 请求
+     */
+    public static PutRequest put(@NonNull String url){
+        return new PutRequest(url);
+    }
+    /**
+     * 自定义请求
+     */
     public static CustomRequest customRequest(@NonNull String url){
         return new CustomRequest(url);
     }

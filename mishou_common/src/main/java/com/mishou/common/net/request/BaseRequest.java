@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.mishou.common.net.OnlyHttp;
 import com.mishou.common.net.api.ApiService;
 import com.mishou.common.net.https.HttpsUtils;
+import com.mishou.common.net.interceptor.HttpHeaderInterceptor;
 import com.mishou.common.net.util.OnlyLog;
 import com.mishou.common.net.util.OnlyUtils;
 
@@ -96,7 +97,7 @@ public abstract class BaseRequest<R extends BaseRequest> {
 
     public BaseRequest(String url) {
         OnlyLog.d("BaseRequest > url ="+url+" class name > "+className);
-        this.url = url;
+        this.url = OnlyUtils.checkNotNull(url,"url(base) is null");
 
         OnlyHttp config = OnlyHttp.getInstance();
 
@@ -285,7 +286,7 @@ public abstract class BaseRequest<R extends BaseRequest> {
 
         if (readTimeOut <= 0 && writeTimeOut <= 0
                 && connectTimeout <= 0 && sslParams == null
-                && hostnameVerifier == null && proxy == null) {
+                && hostnameVerifier == null && proxy == null && baseHeaders.isEmpty()) {
             //本类数据没有更改情况下 直接使用全局初始化 OkHttpClient.Builder
 
             return OnlyHttp.getOkHttpClientBuilder();
@@ -310,6 +311,10 @@ public abstract class BaseRequest<R extends BaseRequest> {
 
             //设置 OKhttp 网络代理
             if (proxy != null) newClientBuilder.proxy(proxy);
+
+            //现将基类 header 添加进拦截器
+            HttpHeaderInterceptor headerInterceptor = new HttpHeaderInterceptor(baseHeaders);
+            newClientBuilder.addInterceptor(headerInterceptor);
 
             //添加网络拦截器
             for (Interceptor interceptor : interceptors) {
