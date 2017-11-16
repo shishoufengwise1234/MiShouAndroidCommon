@@ -80,7 +80,7 @@ public class GetRequest extends BaseRequest<GetRequest> {
             type = new TypeToken<ResponseBody>(){}.getType();
         }
         return observable.map(new ApiResultFunction(null,type))
-                .compose(isSyncRequest ? SchedulerUtils.main() : SchedulerUtils.io_main())
+                .compose(isSyncRequest ? SchedulerUtils.<T>main() : SchedulerUtils.<T>io_main())
                 .retryWhen(new RetryFunction(retryCount, retryDelay, retryIncreaseDelay));
     }
 

@@ -1,5 +1,7 @@
 package com.mishou.common.net.callback;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.internal.$Gson$Types;
 import com.mishou.common.net.model.ApiResult;
 import com.mishou.common.net.util.ClazzUtils;
@@ -22,12 +24,12 @@ public abstract class CallBackProxy<T extends ApiResult<R>,R> implements IType<T
 
     CallBack<R> mCallBack;
 
-    public CallBackProxy(CallBack<R> callBack) {
-        mCallBack = callBack;
+    public CallBackProxy(@NonNull CallBack<R> callBack) {
+        this.mCallBack = callBack;
     }
 
     public CallBack getCallBack() {
-        return mCallBack;
+        return this.mCallBack;
     }
 
     @Override

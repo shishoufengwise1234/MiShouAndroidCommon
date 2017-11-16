@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.mishou.common.net.OnlyHttp;
 import com.mishou.common.net.api.ApiService;
 import com.mishou.common.net.https.HttpsUtils;
+import com.mishou.common.net.util.OnlyLog;
 import com.mishou.common.net.util.OnlyUtils;
 
 import java.io.InputStream;
@@ -42,6 +43,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
  */
 
 public abstract class BaseRequest<R extends BaseRequest> {
+
+    //获取子类名称
+    protected String className = this.getClass().getSimpleName();
 
     protected String url;                                                  //请求url
     protected String baseUrl;                                              //BaseUrl
@@ -91,6 +95,7 @@ public abstract class BaseRequest<R extends BaseRequest> {
 
 
     public BaseRequest(String url) {
+        OnlyLog.d("BaseRequest > url ="+url+" class name > "+className);
         this.url = url;
 
         OnlyHttp config = OnlyHttp.getInstance();

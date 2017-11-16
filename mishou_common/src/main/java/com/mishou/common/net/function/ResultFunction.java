@@ -10,7 +10,7 @@ import io.reactivex.functions.Function;
  * Created by ${shishoufeng} on 17/11/15.
  * email:shishoufeng1227@126.com
  *
- * 结果转换器
+ * 结果转换器  将 ApiResult<T> 数据转换成 T
  */
 
 public class ResultFunction<T> implements Function<ApiResult<T>,T> {
