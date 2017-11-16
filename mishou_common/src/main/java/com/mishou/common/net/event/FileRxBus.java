@@ -1,4 +1,4 @@
-package com.mishou.common.net.file.download;
+package com.mishou.common.net.event;
 
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;

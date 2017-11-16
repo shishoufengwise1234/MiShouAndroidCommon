@@ -1,8 +1,10 @@
-package com.mishou.common.net.file.download;
+package com.mishou.common.net.model;
 
 /**
  * Created by ${shishoufeng} on 2016/10/18 0018.
  * email:shishoufeng1227@126.com
+ *
+ * 文件下载事件封装
  */
 public class FileLoadEvent {
 

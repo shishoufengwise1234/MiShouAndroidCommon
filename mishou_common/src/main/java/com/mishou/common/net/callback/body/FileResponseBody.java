@@ -1,5 +1,8 @@
-package com.mishou.common.net.file.download;
+package com.mishou.common.net.callback.body;
 
+
+import com.mishou.common.net.event.FileRxBus;
+import com.mishou.common.net.model.FileLoadEvent;
 
 import java.io.IOException;
 

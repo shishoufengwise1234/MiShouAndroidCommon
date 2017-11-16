@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.mishou.common.net.https.HttpsUtils;
 import com.mishou.common.net.interceptor.HttpLoggerInterceptor;
 import com.mishou.common.net.request.CustomRequest;
+import com.mishou.common.net.request.DownloadRequest;
 import com.mishou.common.net.request.GetRequest;
 import com.mishou.common.net.request.PostRequest;
 import com.mishou.common.net.util.OnlyLog;
@@ -24,6 +25,7 @@ import io.reactivex.disposables.Disposable;
 import okhttp3.ConnectionPool;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -384,12 +386,26 @@ public class OnlyHttp {
         return new CustomRequest(url);
     }
 
+    public static DownloadRequest download(@NonNull String url){
+        return new DownloadRequest(url);
+    }
+
     /**
      * 取消订阅
      */
     public static void cancelSubscription(Disposable disposable) {
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
+        }
+    }
+
+    /**
+     * 取消一个call 针对于 retrofit
+     *
+     */
+    public static <T> void cancelCall(Call<T> call) {
+        if (call != null && !call.isCanceled()) {
+            call.cancel();
         }
     }
 

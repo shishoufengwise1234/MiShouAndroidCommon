@@ -1,5 +1,7 @@
-package com.mishou.common.net.file.download;
+package com.mishou.common.net.callback;
 
+import com.mishou.common.net.event.FileRxBus;
+import com.mishou.common.net.model.FileLoadEvent;
 import com.orhanobut.logger.Logger;
 
 import java.io.File;
@@ -37,14 +39,20 @@ public abstract class FileCallback implements Callback<ResponseBody> {
      */
     private String destFileName;
 
-    public FileCallback(String destFileDir, String destFileName) {
+    public void setDestFileDir(String destFileDir) {
         this.destFileDir = destFileDir;
+    }
+
+    public void setDestFileName(String destFileName) {
         this.destFileName = destFileName;
+    }
+
+    public FileCallback() {
         subscribeLoadProgress();
     }
 
     public void onSuccess(File file) {
-        unsubscribe();
+        unSubscribe();
     }
 
     /**
@@ -125,7 +133,7 @@ public abstract class FileCallback implements Callback<ResponseBody> {
     /**
      * 取消订阅，防止内存泄漏
      */
-    private void unsubscribe() {
+    private void unSubscribe() {
         if (!rxSubscriptions.isDisposed()) {
             rxSubscriptions.dispose();
         }
