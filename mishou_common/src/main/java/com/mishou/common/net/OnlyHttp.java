@@ -400,7 +400,7 @@ public class OnlyHttp {
     /**
      * 自定义请求
      */
-    public static CustomRequest customRequest(@NonNull String url){
+    public static CustomRequest custom(@NonNull String url){
         return new CustomRequest(url);
     }
 
@@ -411,7 +411,7 @@ public class OnlyHttp {
     /**
      * 取消订阅
      */
-    public static void cancelSubscription(Disposable disposable) {
+    public static void cancelDisposable(Disposable disposable) {
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }

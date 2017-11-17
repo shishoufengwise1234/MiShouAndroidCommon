@@ -108,7 +108,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends RxFragme
 
         LogUtils.d(TAG,"onActivityCreated()"+className);
 
-        setPresenter(presenter);
+        presenter = createPresenter();
 
         onLogic(savedInstanceState);
 

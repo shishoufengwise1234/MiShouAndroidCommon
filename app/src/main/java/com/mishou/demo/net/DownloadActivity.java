@@ -20,9 +20,11 @@ public class DownloadActivity extends BaseMvpActivity {
 
 
 
-    @Override
-    public void setPresenter(Object presenter) {
 
+
+    @Override
+    public Object createPresenter() {
+        return null;
     }
 
     @Override

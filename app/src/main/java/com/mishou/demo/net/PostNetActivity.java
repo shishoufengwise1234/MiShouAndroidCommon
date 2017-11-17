@@ -15,9 +15,11 @@ import com.mishou.common.net.request.BaseBodyRequest;
 public class PostNetActivity extends BaseMvpAppcompatActivity{
 
 
-    @Override
-    public void setPresenter(Object presenter) {
 
+
+    @Override
+    public Object createPresenter() {
+        return null;
     }
 
     @Override

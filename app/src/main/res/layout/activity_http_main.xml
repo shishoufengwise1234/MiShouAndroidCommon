@@ -4,32 +4,30 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     
-    
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_image_loader"
-        android:text="image loader"/>
+        android:id="@+id/btn_get"
+        android:text="get"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_image_picker"
-        android:text="image picker"/>
+        android:id="@+id/btn_post"
+        android:text="post"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_http"
-        android:text="http"/>
+        android:id="@+id/btn_download"
+        android:text="download"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_mvp"
-        android:text="mvp"/>
-    
+        android:id="@+id/btn_upload"
+        android:text="upload"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_zhihu"
-        android:text="知乎数据演示项目开发"/>
+        android:id="@+id/btn_custom"
+        android:text="custom"/>
 
 </LinearLayout>

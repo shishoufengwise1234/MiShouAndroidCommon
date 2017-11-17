@@ -13,10 +13,9 @@ import com.mishou.common.base.mvp.BaseMvpFragmentActivity;
 public class BaseMvpActivity extends BaseMvpFragmentActivity<MvpContect.Presenter> {
 
 
-
     @Override
-    public void setPresenter(MvpContect.Presenter presenter) {
-
+    public MvpContect.Presenter createPresenter() {
+        return null;
     }
 
     @Override

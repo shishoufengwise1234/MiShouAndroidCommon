@@ -15,6 +15,9 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // dex突破65535的限制
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -22,6 +25,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {
@@ -29,6 +33,10 @@ dependencies {
 //    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    compile rootProject.ext.dependencies["cardview"]
+
+    compile rootProject.ext.dependencies["multidex"]
 
 //    compile rootProject.ext.de
 

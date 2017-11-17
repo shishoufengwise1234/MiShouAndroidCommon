@@ -11,11 +11,12 @@ package com.mishou.common.base.mvp;
 
 public interface IBaseView<P> {
 
+
     /**
-     *注入 presenter
-     * @param presenter 目标presenter
+     * 注入 presenter
+     * @return 目标presenter
      */
-    void setPresenter(P presenter);
+    P createPresenter();
 
     /**
      * 显示加载动画

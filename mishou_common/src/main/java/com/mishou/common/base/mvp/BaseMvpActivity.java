@@ -62,7 +62,7 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends RxActivi
 
         mResources = getResources();
 
-        setPresenter(presenter);
+        presenter = createPresenter();
 
         initView(savedInstanceState);
 

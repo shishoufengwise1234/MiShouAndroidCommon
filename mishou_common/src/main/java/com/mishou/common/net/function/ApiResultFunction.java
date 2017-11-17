@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mishou.common.net.model.ApiResult;
 import com.mishou.common.net.util.ClazzUtils;
+import com.mishou.common.net.util.OnlyLog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,12 +57,16 @@ public class ApiResultFunction<T> implements Function<ResponseBody, ApiResult<T>
      */
     @Override
     public ApiResult<T> apply(@io.reactivex.annotations.NonNull ResponseBody responseBody) throws Exception {
+
+        OnlyLog.d("ApiResultFunction -> apply()");
+
         ApiResult<T> apiResult = new ApiResult<>();
 
         apiResult.setCode(-1);
 
         if (type instanceof ParameterizedType) {    //自定义ApiResult
-            final Class<T> cls = (Class) ((ParameterizedType) type).getRawType();
+
+            final Class<T> cls = (Class<T>) ((ParameterizedType) type).getRawType();
 
             //判断是否子类是否继承了 ApiResult
             if (ApiResult.class.isAssignableFrom(cls)) {

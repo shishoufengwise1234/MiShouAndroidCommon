@@ -3,6 +3,7 @@ package com.mishou.common.net.callback;
 import com.google.gson.internal.$Gson$Types;
 import com.mishou.common.net.model.ApiResult;
 import com.mishou.common.net.util.ClazzUtils;
+import com.mishou.common.net.util.OnlyLog;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -32,6 +33,8 @@ public class CallClazzProxy<T extends ApiResult<R>,R> implements IType<T>{
 
     @Override
     public Type getType() {//CallClazz代理方式，获取需要解析的Type
+        OnlyLog.d("CallClazzProxy  -> getType()");
+
         Type typeArguments = null;
         if (type != null) {
             typeArguments = type;

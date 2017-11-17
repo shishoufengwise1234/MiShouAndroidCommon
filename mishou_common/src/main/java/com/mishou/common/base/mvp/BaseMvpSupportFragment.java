@@ -107,7 +107,7 @@ public abstract class BaseMvpSupportFragment<P extends IBasePresenter> extends R
 
         LogUtils.d(TAG,"onActivityCreated()"+className);
 
-        setPresenter(presenter);
+        presenter = createPresenter();
 
         onLogic(savedInstanceState);
 

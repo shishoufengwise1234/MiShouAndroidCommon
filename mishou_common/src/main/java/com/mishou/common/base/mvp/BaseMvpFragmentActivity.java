@@ -64,7 +64,7 @@ public abstract class BaseMvpFragmentActivity<P extends IBasePresenter> extends 
 
         mResources = getResources();
 
-        setPresenter(presenter);
+        presenter = createPresenter();
 
         initView(savedInstanceState);
 

@@ -14,8 +14,8 @@ public class BaseMvpFragmentTest extends BaseMvpSupportFragment {
 
 
     @Override
-    public void setPresenter(Object presenter) {
-
+    public Object createPresenter() {
+        return null;
     }
 
     @Override

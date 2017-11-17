@@ -2,6 +2,7 @@ package com.mishou.common.net.callback;
 
 import com.mishou.common.net.exception.ApiException;
 import com.mishou.common.net.util.ClazzUtils;
+import com.mishou.common.net.util.OnlyLog;
 
 import java.lang.reflect.Type;
 
@@ -25,10 +26,12 @@ public abstract class CallBack<T> implements IType<T>{
 
     @Override
     public Type getType() {
+        OnlyLog.d("CallBack -> getType()");
         return ClazzUtils.findNeedClass(getClass());
     }
 
     public Type getRawType() {//获取需要解析的泛型T raw类型
+        OnlyLog.d("CallBack -> getRawType()");
         return ClazzUtils.findRawType(getClass());
     }
 }

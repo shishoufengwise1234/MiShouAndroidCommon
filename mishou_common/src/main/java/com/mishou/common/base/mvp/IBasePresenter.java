@@ -14,8 +14,5 @@ public interface IBasePresenter<V> {
 
     void start();
 
-    /**
-     * 显示网络错误
-     */
-    void showNetError();
+
 }

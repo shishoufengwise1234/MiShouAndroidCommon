@@ -20,9 +20,11 @@ import java.io.File;
 public class UploadActivity extends BaseMvpFragmentActivity {
 
 
-    @Override
-    public void setPresenter(Object presenter) {
 
+
+    @Override
+    public Object createPresenter() {
+        return null;
     }
 
     @Override

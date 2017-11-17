@@ -64,7 +64,7 @@ public abstract class BaseMvpAppcompatActivity<P extends IBasePresenter> extends
 
         mResources = getResources();
 
-        setPresenter(presenter);
+        presenter = createPresenter();
 
         initView(savedInstanceState);
 
@@ -195,6 +195,8 @@ public abstract class BaseMvpAppcompatActivity<P extends IBasePresenter> extends
         super.onDestroy();
 
         LogUtils.d(TAG, "onDestroy: "+className);
+
+        this.mContext = null;
 
         if (unbinder != null) unbinder.unbind();
 

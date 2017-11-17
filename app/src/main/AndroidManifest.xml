@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     
     
     <application
@@ -29,6 +30,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        
+        <activity android:name="com.mishou.demo.net.GetNetActivity"/>
+        <activity android:name="com.mishou.demo.net.HttpMainActivity"/>
+        <activity android:name="com.mishou.demo.net.CustomHttpActivity"/>
+        
+        <activity android:name="com.mishou.demo.zhihu.ZhihuActivity"/>
         
         <activity android:name="com.mishou.demo.EditActivity"/>
         

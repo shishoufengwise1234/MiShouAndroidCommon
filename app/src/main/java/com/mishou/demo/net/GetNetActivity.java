@@ -1,20 +1,28 @@
 package com.mishou.demo.net;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Button;
 
-import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mishou.common.base.mvp.BaseMvpAppcompatActivity;
+import com.mishou.common.demo.R;
 import com.mishou.common.net.OnlyHttp;
-import com.mishou.common.net.callback.OnProgressDialogListener;
-import com.mishou.common.net.callback.ProgressCallBack;
-import com.mishou.demo.bean.User;
+import com.mishou.common.net.callback.CallBack;
+import com.mishou.common.net.callback.CallClazzProxy;
+import com.mishou.common.net.exception.ApiException;
+import com.mishou.common.net.observer.CallBackSubscriber;
+import com.mishou.demo.Constants;
+import com.mishou.demo.bean.CustomApi;
+import com.mishou.demo.bean.NowResult;
+import com.orhanobut.logger.Logger;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
-import io.reactivex.disposables.Disposable;
+import butterknife.BindView;
 
 /**
  * Created by ${shishoufeng} on 17/11/14.
@@ -24,9 +32,14 @@ import io.reactivex.disposables.Disposable;
 public class GetNetActivity extends BaseMvpAppcompatActivity {
 
 
-    @Override
-    public void setPresenter(Object presenter) {
+    @BindView(R.id.btn_send)
+    Button btnSend;
 
+
+
+    @Override
+    public Object createPresenter() {
+        return null;
     }
 
     @Override
@@ -46,7 +59,7 @@ public class GetNetActivity extends BaseMvpAppcompatActivity {
 
     @Override
     protected int getLayoutView() {
-        return 0;
+        return R.layout.activity_main_net;
     }
 
     @Override
@@ -62,33 +75,77 @@ public class GetNetActivity extends BaseMvpAppcompatActivity {
     @Override
     protected void initData() {
 
-        Map<String,String> headers = new LinkedHashMap<>();
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                sendGet();
+            }
+        });
+
+
+
+
+    }
+
+    private void sendGet() {
+
+//        Map<String,String> headers = new LinkedHashMap<>();
         Map<String,String> params = new LinkedHashMap<>();
+        params.put("location","北京");
+        params.put("key",Constants.KEY);
+        params.put("unit","m");
+
 
         //返回 disposable 或者 observable 方便操作
-        Disposable disposable = OnlyHttp.get("") //get 访问
-                .addHeaders(headers) //添加请求头
+        OnlyHttp.get(Constants.WEATHER_GET) //get 访问
                 .addParams(params)//添加参数
-                .syncRequest(true)//是否异步发送
-                .addInterceptor(null)//添加自定义拦截器
-                .addNetworkInterceptor(null)//添加网络拦截器
-                .gson(new Gson())//添加自定义gson转换解析对象
-                .execute(new ProgressCallBack<User>(new OnProgressDialogListener() {
+                .addParams("location","北京")
+                .addParams("key",Constants.KEY)
+                .addParams("unit","m")
+//                .execute(NowResult.class)
+                .execute(new CallClazzProxy<CustomApi<List<NowResult>>,
+                                List<NowResult>>(new TypeToken<List<NowResult>>(){}.getType()))
+                .subscribe(new CallBackSubscriber<List<NowResult>>(this, new CallBack<List<NowResult>>() {
                     @Override
-                    public Dialog createDialog() {
-                        //生成dialog 请求开始时 显示 取消dialog时取消请求  请求结束 关闭dialog
-                        return new Dialog(GetNetActivity.this);
-                    }
-                }) {
-                    @Override
-                    public void onSuccess(User user) {
-                        //回调数据
-                    }
-                });
-        //关闭订阅者 防止内存泄漏 可结合 RxLifecycle 一起使用
-        if (!disposable.isDisposed())
-            disposable.dispose();
+                    public void onStart() {
 
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(ApiException e) {
+
+                        Logger.d(e);
+                    }
+
+                    @Override
+                    public void onSuccess(List<NowResult> nowResults) {
+
+                    }
+                }));
+
+
+//                .execute(new ProgressCallBack<NowResult>(new OnProgressDialogListener() {
+//                    @Override
+//                    public Dialog createDialog() {
+//                        return new LoadingDialog(GetNetActivity.this);
+//                    }
+//                }) {
+//                    @Override
+//                    public void onSuccess(NowResult nowResult) {
+//
+//                        Logger.d("onSuccess()");
+//
+//                        if (nowResult != null)
+//                            Logger.d(nowResult);
+//                    }
+//                }
+//                );
 
     }
 }

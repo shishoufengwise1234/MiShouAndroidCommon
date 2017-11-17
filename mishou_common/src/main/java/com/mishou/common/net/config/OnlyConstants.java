@@ -78,6 +78,12 @@ public class OnlyConstants {
          * 空指针错误
          */
         public static final int NULLPOINTER_EXCEPTION = UNKNOWNHOST_ERROR + 1;
+
+        /**
+         * 数据转换出错
+         */
+        public static final int RESULT_CAST_ERROR = 2000;
+
     }
 
 }

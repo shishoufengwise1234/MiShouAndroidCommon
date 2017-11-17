@@ -117,6 +117,13 @@ public class CustomRequest extends BaseRequest<CustomRequest> {
         return super.create();
     }
 
+    /**
+     * 创建retrofit 对象
+     */
+    public CustomRequest createRetrofit(){
+        return create();
+    }
+
     private void checkRetrofit() {
         if (retrofit == null) {
             throw new NullPointerException("Retrofit is null  please init create() ");

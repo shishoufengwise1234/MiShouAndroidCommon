@@ -11,6 +11,9 @@ import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 /**
  * Created by ${shishoufeng} on 17/11/13.
  * email:shishoufeng1227@126.com
@@ -43,6 +46,8 @@ public class DemoApplication extends BaseApplication {
 
         OnlyHttp.getInstance()
                 .init(mContext)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .setBaseUrl(Constants.WEATHER_BASE)
                 .debug(null,BuildConfig.DEBUG);
 
