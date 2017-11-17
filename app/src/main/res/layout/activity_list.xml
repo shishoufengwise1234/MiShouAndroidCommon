@@ -30,6 +30,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_zhihu"
-        android:text="知乎数据演示项目开发"/>
+        android:text="知乎数据演示项目开发 mvp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_history"
+        android:text="历史上的今天 get / post 请求数据"/>
 
 </LinearLayout>

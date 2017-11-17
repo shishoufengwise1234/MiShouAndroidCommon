@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.mishou.common.base.mvp.BaseMvpAppcompatActivity;
 import com.mishou.common.demo.R;
 import com.mishou.common.utils.ui.JumpUtils;
+import com.mishou.demo.history.HistoryActivity;
 import com.mishou.demo.net.HttpMainActivity;
 import com.mishou.demo.zhihu.ZhihuActivity;
 
@@ -75,7 +76,7 @@ public class MainActivity extends BaseMvpAppcompatActivity {
 
 
     @OnClick({R.id.btn_image_loader, R.id.btn_image_picker,
-            R.id.btn_http, R.id.btn_mvp,R.id.btn_zhihu})
+            R.id.btn_http, R.id.btn_mvp,R.id.btn_zhihu,R.id.btn_history})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_image_loader:
@@ -92,6 +93,9 @@ public class MainActivity extends BaseMvpAppcompatActivity {
             case R.id.btn_zhihu:
                 JumpUtils.startActivity(mContext, ZhihuActivity.class);
                 break;
+                case R.id.btn_history:
+                    JumpUtils.startActivity(this, HistoryActivity.class);
+                    break;
         }
     }
 }

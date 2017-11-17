@@ -39,6 +39,8 @@
         
         <activity android:name="com.mishou.demo.EditActivity"/>
         
+        <activity android:name="com.mishou.demo.history.HistoryActivity"/>
+        
     </application>
 
 </manifest>
