@@ -58,7 +58,7 @@ public class ApiException extends Exception {
 
             ex.message = httpException.getMessage();
             return ex;
-        } else if (e instanceof ServerException) {
+        } else if (e instanceof ServerException) { //自定义服务器异常
             ServerException resultException = (ServerException) e;
             ex = new ApiException(resultException, resultException.getErrCode());
             ex.message = resultException.getMessage();

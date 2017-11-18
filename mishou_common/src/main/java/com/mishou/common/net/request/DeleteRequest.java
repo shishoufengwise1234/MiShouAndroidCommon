@@ -85,6 +85,6 @@ public class DeleteRequest extends BaseRequest<DeleteRequest>{
 
     @Override
     protected Observable<ResponseBody> createObservable() {
-        return apiService.delete(url,baseParams);
+        return apiService.delete(url,baseParams.getUrlParamsMap());
     }
 }

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.mishou.common.base.mvp.BaseMvpAppcompatActivity;
 import com.mishou.common.demo.R;
-import com.mishou.common.utils.ui.JumpUtils;
+import com.mishou.common.utils.ui.JumpDataUtils;
 import com.mishou.common.widgets.view.MultiStateView;
 import com.mishou.demo.bean.HistoryDetailsBean;
 import com.mishou.demo.history.contract.HistoryDetailsContract;
@@ -89,12 +89,7 @@ public class HistoryDetailsActivity extends BaseMvpAppcompatActivity<HistoryDeta
     @Override
     protected void initData() {
 
-        String eid = "";
-
-        Bundle bundle = getIntent().getBundleExtra(JumpUtils.DEFAULT_DATA_KEY);
-        if (bundle != null){
-            eid = bundle.getString("eid","");
-        }
+        String eid = JumpDataUtils.getString(getIntent(),"eid");
 
         presenter.loadDetailsData(eid);
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.mishou.common.application.BaseApplication;
 import com.mishou.common.demo.BuildConfig;
+import com.mishou.common.image.ImageLoader;
 import com.mishou.common.net.OnlyHttp;
 import com.mishou.common.utils.LogUtils;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -51,6 +52,9 @@ public class DemoApplication extends BaseApplication {
                 .setBaseUrl(Constants.WEATHER_BASE)
                 .debug(null,BuildConfig.DEBUG);
 
+        //打开图片加载 debug 模式
+        ImageLoader.getInstance().setDebug(mContext,BuildConfig.DEBUG);
+
 
         initLogger();
     }
@@ -59,7 +63,7 @@ public class DemoApplication extends BaseApplication {
 
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
-                .methodCount(1)         // (Optional) How many method line to show. Default 2
+                .methodCount(2)         // (Optional) How many method line to show. Default 2
                 .methodOffset(7)        // (Optional) Hides internal method calls up to offset. Default 5
                 .tag(TAG)   // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build();

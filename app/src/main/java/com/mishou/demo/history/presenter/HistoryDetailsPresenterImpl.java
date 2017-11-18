@@ -25,7 +25,7 @@ public class HistoryDetailsPresenterImpl implements HistoryDetailsContract.Prese
 
     private HistoryDetailsContract.View viewHis;
 
-    public HistoryDetailsPresenterImpl(HistoryDetailsContract.View view){
+    public HistoryDetailsPresenterImpl(HistoryDetailsContract.View view) {
         this.viewHis = view;
     }
 
@@ -33,7 +33,7 @@ public class HistoryDetailsPresenterImpl implements HistoryDetailsContract.Prese
     public void loadDetailsData(String eid) {
 
         //参数
-        Map<String,String> params = new LinkedHashMap<>();
+        Map<String, String> params = new LinkedHashMap<>();
         params.put("key", Constants.HISTORY_KEY);
         params.put("e_id", eid);
 
@@ -59,18 +59,14 @@ public class HistoryDetailsPresenterImpl implements HistoryDetailsContract.Prese
     private void post_custom_apiservice(Map<String, String> params) {
 
 
-
     }
 
     private void post_custom(Map<String, String> params) {
 
 
-
-
     }
 
     private void post_disposable(Map<String, String> params) {
-
 
 
     }
@@ -83,11 +79,9 @@ public class HistoryDetailsPresenterImpl implements HistoryDetailsContract.Prese
     private void post_simple_callback(Map<String, String> params) {
 
 
-
     }
 
     private void post_callback_proxy(Map<String, String> params) {
-
 
 
     }
@@ -147,7 +141,7 @@ public class HistoryDetailsPresenterImpl implements HistoryDetailsContract.Prese
                     public void onSuccess(List<HistoryDetailsBean> historyDetailsBeans) {
                         Logger.d("onsuccess");
 
-                        if (historyDetailsBeans != null){
+                        if (historyDetailsBeans != null) {
                             HistoryDetailsBean beans = historyDetailsBeans.get(0);
 
                             viewHis.showDetailsData(beans);
@@ -164,20 +158,23 @@ public class HistoryDetailsPresenterImpl implements HistoryDetailsContract.Prese
         //直接使用 callback 回调获取数据
         OnlyHttp.get(Constants.HISTORY_DETAILS)
                 .addParams(params)
-                .execute(new CallBack<List<HistoryDetailsBean>>() {
+                .execute(new CallBackProxy<HistoryData<List<HistoryDetailsBean>>, List<HistoryDetailsBean>>(new CallBack<List<HistoryDetailsBean>>() {
                     @Override
                     public void onStart() {
-                        Logger.d("start");
+
+                        Logger.d("onstart");
                     }
 
                     @Override
                     public void onCompleted() {
+
                         Logger.d("oncompleted");
                     }
 
                     @Override
                     public void onError(ApiException e) {
-                        Logger.d("onerror");
+
+                        onErrorCallback(e);
                     }
 
                     @Override
@@ -185,23 +182,32 @@ public class HistoryDetailsPresenterImpl implements HistoryDetailsContract.Prese
 
                         Logger.d("onsuccess");
                         onReuslt(historyDetailsBeans);
+
                     }
+                }) {
                 });
 
 
     }
 
-    private void onReuslt(List<HistoryDetailsBean> historyDetailsBeans) {
+    private void onErrorCallback(ApiException e) {
+        Logger.d("onerror"+e);
 
+        viewHis.onShowNetError();
+    }
+
+    private void onReuslt(List<HistoryDetailsBean> historyDetailsBeans) {
 
         viewHis.showDetailsData(historyDetailsBeans.get(0));
     }
 
 
+
+
     @Override
     public void start(@Nullable HistoryDetailsContract.View view) {
 
-        Logger.d("start"+view);
+        Logger.d("start" + view);
 
 
         viewHis.onShowLoading();

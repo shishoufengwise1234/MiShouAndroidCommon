@@ -23,7 +23,11 @@ public class ResultFunction<T> implements Function<ApiResult<T>,T> {
         if (tApiResult != null && tApiResult.isOk()){
             return tApiResult.getData();
         }else{
-            throw new ServerException(OnlyConstants.ERROR_CODE.RESULT_CAST_ERROR,"apiResult is error");
+            if (tApiResult != null){ //将服务器code 和 msg 转换过去
+                throw new ServerException(tApiResult.getCode(),tApiResult.getMsg()== null ? "数据转换错误 apiResult -> T = error":tApiResult.getMsg());
+            }else{  //默认数据
+                throw new ServerException(OnlyConstants.ERROR_CODE.RESULT_CAST_ERROR,"数据转换错误 apiResult -> T = error");
+            }
         }
     }
 }

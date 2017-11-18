@@ -87,6 +87,6 @@ public class GetRequest extends BaseRequest<GetRequest> {
 
     @Override
     protected Observable<ResponseBody> createObservable() {
-        return apiService.get(url, baseParams);
+        return apiService.get(url, baseParams.getUrlParamsMap());
     }
 }

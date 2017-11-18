@@ -11,6 +11,7 @@
         android:id="@+id/toolbar_history_details"
         app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
         android:background="@color/colorPrimary"
+        app:titleTextColor="@android:color/white"
         />
     
     <com.mishou.common.widgets.view.MultiStateView
@@ -33,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_content"
                 android:textSize="16sp"
+                android:padding="10dp"
                 android:textColor="@android:color/black"
                 />
             
