@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.mishou.common.base.mvp.BaseMvpAppcompatActivity;
+import com.mishou.common.base.mvp.IBasePresenter;
 import com.mishou.common.net.OnlyHttp;
 import com.mishou.common.net.request.BaseBodyRequest;
 
@@ -18,7 +19,7 @@ public class PostNetActivity extends BaseMvpAppcompatActivity{
 
 
     @Override
-    public Object createPresenter() {
+    public IBasePresenter createPresenter() {
         return null;
     }
 

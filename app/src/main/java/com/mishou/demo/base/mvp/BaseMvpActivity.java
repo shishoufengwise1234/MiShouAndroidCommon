@@ -3,18 +3,19 @@ package com.mishou.demo.base.mvp;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.mishou.common.base.mvp.BaseMvpFragmentActivity;
+import com.mishou.common.base.mvp.BaseMvpAppcompatActivity;
+import com.mishou.demo.base.mvp.contract.MyContract;
 
 /**
  * Created by ${shishoufeng} on 17/11/13.
  * email:shishoufeng1227@126.com
  */
 
-public class BaseMvpActivity extends BaseMvpFragmentActivity<MvpContect.Presenter> {
+public class BaseMvpActivity extends BaseMvpAppcompatActivity<MyContract.Presenter> implements MyContract.View{
 
 
     @Override
-    public MvpContect.Presenter createPresenter() {
+    public MyContract.Presenter createPresenter() {
         return null;
     }
 
@@ -30,6 +31,11 @@ public class BaseMvpActivity extends BaseMvpFragmentActivity<MvpContect.Presente
 
     @Override
     public void onShowNetError() {
+
+    }
+
+    @Override
+    public void show() {
 
     }
 

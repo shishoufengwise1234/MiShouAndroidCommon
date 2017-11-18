@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.mishou.common.base.mvp.BaseMvpSupportFragment;
+import com.mishou.common.base.mvp.IBasePresenter;
 
 /**
  * Created by ${shishoufeng} on 17/11/13.
@@ -14,7 +15,7 @@ public class BaseMvpFragmentTest extends BaseMvpSupportFragment {
 
 
     @Override
-    public Object createPresenter() {
+    public IBasePresenter createPresenter() {
         return null;
     }
 

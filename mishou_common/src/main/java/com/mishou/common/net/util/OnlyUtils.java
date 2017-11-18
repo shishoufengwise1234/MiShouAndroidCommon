@@ -21,6 +21,11 @@ import java.io.IOException;
 public class OnlyUtils {
 
 
+    /**
+     * null 值检查
+     * @param t 检查数据
+     * @param message 异常信息
+     */
     public static <T> T checkNotNull(T t, String message) {
         if (t == null) {
             throw new NullPointerException(message);
@@ -47,6 +52,10 @@ public class OnlyUtils {
         return !(null == info || !info.isAvailable());
     }
 
+    /**
+     * 关闭资源
+     * @param close 资源
+     */
     public static void close(Closeable close) {
         if (close != null) {
             try {
@@ -56,6 +65,11 @@ public class OnlyUtils {
         }
     }
 
+    /**
+     * 关闭资源
+     * @param close 资源
+     * @throws IOException
+     */
     public static void closeThrowException(Closeable close) throws IOException {
         if (close != null) {
             close.close();

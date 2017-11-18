@@ -119,6 +119,9 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends RxFragme
         super.onStart();
 
         LogUtils.d(TAG,"onStart()"+className);
+
+        if (presenter != null)
+            presenter.start(this);
     }
 
     /***
@@ -188,6 +191,10 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends RxFragme
 
     @Override
     public void onDestroy() {
+
+        if (presenter != null)
+            presenter.destroy();
+
         super.onDestroy();
 
         LogUtils.d(TAG,"onDestroy()"+className);

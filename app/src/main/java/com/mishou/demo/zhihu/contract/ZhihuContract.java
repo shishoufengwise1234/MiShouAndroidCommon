@@ -21,7 +21,7 @@ public interface ZhihuContract {
         void showDataSuccess(ZhihuData data);
     }
 
-    interface Presenter extends IBasePresenter {
+    interface Presenter extends IBasePresenter<View> {
 
 
         void loadZhihuData();

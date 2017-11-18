@@ -118,6 +118,9 @@ public abstract class BaseMvpSupportFragment<P extends IBasePresenter> extends R
         super.onStart();
 
         LogUtils.d(TAG,"onStart()"+className);
+
+        if (presenter != null)
+            presenter.start(this);
     }
 
     /***
@@ -187,6 +190,10 @@ public abstract class BaseMvpSupportFragment<P extends IBasePresenter> extends R
 
     @Override
     public void onDestroy() {
+
+        if (presenter != null)
+            presenter.destroy();
+
         super.onDestroy();
 
         LogUtils.d(TAG,"onDestroy()"+className);

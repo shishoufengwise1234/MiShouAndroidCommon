@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.mishou.common.base.mvp.BaseMvpActivity;
+import com.mishou.common.base.mvp.IBasePresenter;
 import com.mishou.common.demo.R;
 import com.mishou.common.utils.ui.JumpUtils;
 
@@ -33,7 +34,7 @@ public class HttpMainActivity extends BaseMvpActivity {
 
 
     @Override
-    public Object createPresenter() {
+    public IBasePresenter createPresenter() {
         return null;
     }
 

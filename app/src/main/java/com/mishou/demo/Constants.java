@@ -24,6 +24,8 @@ public class Constants {
 
     //list 数据
     public static final String HISTORY_LIST = "http://v.juhe.cn/todayOnhistory/queryEvent.php";
+    //详情数据
+    public static final String HISTORY_DETAILS = "http://v.juhe.cn/todayOnhistory/queryDetail.php";
 
     
 }

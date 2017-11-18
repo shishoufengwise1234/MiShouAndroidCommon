@@ -151,6 +151,9 @@ public abstract class BaseMvpAppcompatActivity<P extends IBasePresenter> extends
         LogUtils.d(TAG, "onStart: "+className);
         mActivity = this;
 
+        if (presenter != null)
+            presenter.start(this);
+
     }
 
     @Override
@@ -192,11 +195,15 @@ public abstract class BaseMvpAppcompatActivity<P extends IBasePresenter> extends
 
     @Override
     protected void onDestroy() {
+
+        if (presenter != null)
+            presenter.destroy();
+
         super.onDestroy();
 
         LogUtils.d(TAG, "onDestroy: "+className);
 
-        this.mContext = null;
+//        this.mContext = null;
 
         if (unbinder != null) unbinder.unbind();
 

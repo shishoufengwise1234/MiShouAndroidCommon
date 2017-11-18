@@ -9,7 +9,7 @@ package com.mishou.common.base.mvp;
  * view  base
  */
 
-public interface IBaseView<P> {
+public interface IBaseView<P extends IBasePresenter> {
 
 
     /**

@@ -150,6 +150,9 @@ public abstract class BaseMvpLazyLoadFragment<P extends IBasePresenter> extends 
         super.onStart();
 
         LogUtils.d(TAG,"onStart()"+className);
+
+        if (presenter != null)
+            presenter.start(this);
     }
 
     /***
@@ -223,6 +226,10 @@ public abstract class BaseMvpLazyLoadFragment<P extends IBasePresenter> extends 
 
     @Override
     public void onDestroy() {
+
+        if (presenter != null)
+            presenter.destroy();
+
         super.onDestroy();
 
         LogUtils.d(TAG,"onDestroy()"+className);

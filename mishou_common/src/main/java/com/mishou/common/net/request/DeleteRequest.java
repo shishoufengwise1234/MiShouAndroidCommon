@@ -31,12 +31,11 @@ public class DeleteRequest extends BaseRequest<DeleteRequest>{
     }
 
     public <T> Observable<T> execute(Class<T> clazz) {
-        return this.execute(new CallClazzProxy<ApiResult<T>, T>(clazz));
+        return this.execute(new CallClazzProxy<ApiResult<T>, T>(clazz){});
     }
 
     public <T> Observable<T> execute(Type type) {
-        return execute(new CallClazzProxy<ApiResult<T>, T>(type) {
-        });
+        return execute(new CallClazzProxy<ApiResult<T>, T>(type){});
     }
 
     /**

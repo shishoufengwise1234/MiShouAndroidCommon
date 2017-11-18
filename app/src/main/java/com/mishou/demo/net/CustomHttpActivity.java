@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.mishou.common.base.mvp.BaseMvpAppcompatActivity;
+import com.mishou.common.base.mvp.IBasePresenter;
 import com.mishou.common.demo.R;
 import com.mishou.common.net.OnlyHttp;
 import com.mishou.demo.Constants;
@@ -36,7 +37,7 @@ public class CustomHttpActivity extends BaseMvpAppcompatActivity {
 
 
     @Override
-    public Object createPresenter() {
+    public IBasePresenter createPresenter() {
         return null;
     }
 

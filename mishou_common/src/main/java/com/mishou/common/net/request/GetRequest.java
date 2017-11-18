@@ -32,7 +32,7 @@ public class GetRequest extends BaseRequest<GetRequest> {
     }
 
     public <T> Observable<T> execute(Class<T> clazz) {
-        return this.execute(new CallClazzProxy<ApiResult<T>, T>(clazz));
+        return this.execute(new CallClazzProxy<ApiResult<T>, T>(clazz){});
     }
 
     public <T> Observable<T> execute(Type type) {

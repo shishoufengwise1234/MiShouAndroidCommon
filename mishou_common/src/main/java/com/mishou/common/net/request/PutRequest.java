@@ -31,11 +31,11 @@ public class PutRequest extends BaseBodyRequest<PutRequest>{
     }
 
     public <T> Observable<T> execute(Class<T> clazz) {
-        return this.execute(new CallClazzProxy<ApiResult<T>, T>(clazz));
+        return this.execute(new CallClazzProxy<ApiResult<T>, T>(clazz){});
     }
 
     public <T> Observable<T> execute(Type type) {
-        return execute(new CallClazzProxy<ApiResult<T>, T>(type) {
+        return execute(new CallClazzProxy<ApiResult<T>, T>(type){
         });
     }
 
@@ -55,7 +55,7 @@ public class PutRequest extends BaseBodyRequest<PutRequest>{
     }
 
     public <T> Disposable execute(CallBack<T> callBack) {
-        return execute(new CallBackProxy<ApiResult<T>, T>(callBack) {
+        return execute(new CallBackProxy<ApiResult<T>, T>(callBack){
         });
     }
 

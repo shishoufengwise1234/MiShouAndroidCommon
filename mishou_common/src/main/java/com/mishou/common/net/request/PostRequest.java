@@ -61,7 +61,7 @@ public class PostRequest extends BaseBodyRequest<PostRequest> {
 
     public <T> Disposable execute(CallBackProxy<? extends ApiResult<T>, T> proxy) {
 
-        return toObservable(createObservable(), proxy).subscribeWith(new CallBackSubscriber<T>(baseContext, proxy.getCallBack()));
+        return toObservable(create().createObservable(), proxy).subscribeWith(new CallBackSubscriber<T>(baseContext, proxy.getCallBack()));
 
     }
 

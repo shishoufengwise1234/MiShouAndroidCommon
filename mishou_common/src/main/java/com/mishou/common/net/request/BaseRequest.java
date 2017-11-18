@@ -9,6 +9,7 @@ import com.mishou.common.net.OnlyHttp;
 import com.mishou.common.net.api.ApiService;
 import com.mishou.common.net.https.HttpsUtils;
 import com.mishou.common.net.interceptor.HttpHeaderInterceptor;
+import com.mishou.common.net.model.HttpParams;
 import com.mishou.common.net.util.OnlyLog;
 import com.mishou.common.net.util.OnlyUtils;
 
@@ -92,7 +93,7 @@ public abstract class BaseRequest<R extends BaseRequest> {
     //请求头
     protected Map<String, String> baseHeaders = new LinkedHashMap<>();
     //请求参数
-    protected Map<String, String> baseParams = new LinkedHashMap<>();
+    protected HttpParams baseParams = new HttpParams();
 
 
     public BaseRequest(String url) {
@@ -129,6 +130,10 @@ public abstract class BaseRequest<R extends BaseRequest> {
         return (R) this;
     }
 
+    /**
+     * 局部设置 base URL
+     * @param baseUrl  baseUrl
+     */
     public R baseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
         if (!TextUtils.isEmpty(this.baseUrl))
@@ -235,26 +240,39 @@ public abstract class BaseRequest<R extends BaseRequest> {
         this.baseHeaders.put(key, value);
         return (R) this;
     }
-
+    /**
+     * 添加头信息
+     */
     public R addHeaders(Map<String, String> headers) {
         this.baseHeaders.putAll(headers);
         return (R) this;
     }
-
+    /**
+     * 添加参数
+     */
     public R addParams(String key, String value) {
         this.baseParams.put(key, value);
         return (R) this;
     }
+    /**
+     * 添加参数
+     */
     public R addParams(Map<String,String> map){
-        this.baseParams.putAll(map);
+        this.baseParams.put(map);
         return (R) this;
     }
 
+    /**
+     * 移除参数
+     */
     public R removeParams(String key) {
         this.baseParams.remove(key);
         return (R) this;
     }
 
+    /**
+     * 清除所有参数
+     */
     public R removeAllParams() {
         this.baseParams.clear();
         return (R) this;

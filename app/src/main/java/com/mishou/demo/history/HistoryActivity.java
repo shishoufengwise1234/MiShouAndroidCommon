@@ -11,6 +11,7 @@ import com.mishou.common.adapter.recyclerview.BaseQuickAdapter;
 import com.mishou.common.base.mvp.BaseMvpAppcompatActivity;
 import com.mishou.common.demo.R;
 import com.mishou.common.utils.TimeUtils;
+import com.mishou.common.utils.ui.JumpUtils;
 import com.mishou.demo.Constants;
 import com.mishou.demo.bean.HistoryBean;
 import com.mishou.demo.history.adapter.HistoryListAdapter;
@@ -100,7 +101,15 @@ public class HistoryActivity extends BaseMvpAppcompatActivity<HistoryContract.Pr
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-                adapter.getData().get(position);
+                HistoryBean bean = (HistoryBean) adapter.getItem(position);
+                if (bean != null){
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("eid",bean.getE_id());
+
+                    JumpUtils.startActivity(mContext,HistoryDetailsActivity.class,bundle);
+                }
+
             }
         });
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.mishou.common.base.mvp.BaseMvpActivity;
+import com.mishou.common.base.mvp.IBasePresenter;
 import com.mishou.common.net.OnlyHttp;
 import com.mishou.common.net.callback.FileCallback;
 
@@ -23,7 +24,7 @@ public class DownloadActivity extends BaseMvpActivity {
 
 
     @Override
-    public Object createPresenter() {
+    public IBasePresenter createPresenter() {
         return null;
     }
 

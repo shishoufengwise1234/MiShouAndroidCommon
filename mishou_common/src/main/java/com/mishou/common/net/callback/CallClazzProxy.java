@@ -17,7 +17,7 @@ import okhttp3.ResponseBody;
  * CallClazz代理方式，获取需要解析的Type
  */
 
-public class CallClazzProxy<T extends ApiResult<R>,R> implements IType<T>{
+public abstract class CallClazzProxy<T extends ApiResult<R>,R> implements IType<T>{
 
 
     private Type type;

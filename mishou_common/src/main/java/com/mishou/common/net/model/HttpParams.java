@@ -66,15 +66,22 @@ public class HttpParams {
         }
     }
 
+    /**
+     * 添加上传参数 URL 中
+     */
     public void put(Map<String, String> params) {
         if (params == null || params.isEmpty()) return;
         this.urlParamsMap.putAll(params);
     }
 
+    /**
+     * 添加上传 参数 URL 中
+     */
     public void put(String key, String value) {
         this.urlParamsMap.put(key, value);
     }
 
+    //添加文件参数
     public <T extends File> void put(String key, T file, OnUploadProgressListener onUploadProgressListener) {
         put(key, file, file.getName(), onUploadProgressListener);
     }

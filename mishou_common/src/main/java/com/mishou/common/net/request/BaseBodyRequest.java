@@ -42,9 +42,6 @@ public abstract class BaseBodyRequest<R extends BaseBodyRequest> extends BaseReq
     //请求体
     protected RequestBody requestBody;
 
-    //请求参数
-    protected HttpParams baseParams;
-
     private int mUploadType = PART;
 
     /**

@@ -149,6 +149,9 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends RxActivi
         LogUtils.d(TAG, "onStart: "+className);
         mActivity = this;
 
+        if (presenter != null)
+            presenter.start(this);
+
     }
 
     @Override
@@ -190,6 +193,10 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends RxActivi
 
     @Override
     protected void onDestroy() {
+
+        if (presenter != null)
+            presenter.destroy();
+
         super.onDestroy();
 
         LogUtils.d(TAG, "onDestroy: "+className);

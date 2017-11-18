@@ -1,5 +1,7 @@
 package com.mishou.demo.zhihu.presenter;
 
+import android.support.annotation.Nullable;
+
 import com.mishou.common.net.OnlyHttp;
 import com.mishou.demo.Constants;
 import com.mishou.demo.zhihu.api.ZhihuApiService;
@@ -27,11 +29,7 @@ public class ZhihuPresenterImpl implements ZhihuContract.Presenter {
     }
 
 
-    @Override
-    public void start() {
 
-
-    }
 
 
     @Override
@@ -74,6 +72,17 @@ public class ZhihuPresenterImpl implements ZhihuContract.Presenter {
                         OnlyHttp.cancelDisposable(disposable);
                     }
                 });
+
+    }
+
+
+    @Override
+    public void start(@Nullable ZhihuContract.View view) {
+
+    }
+
+    @Override
+    public void destroy() {
 
     }
 }

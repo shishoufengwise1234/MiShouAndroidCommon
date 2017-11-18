@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar_history_details"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+        android:background="@color/colorPrimary"
+        />
+    
+    <com.mishou.common.widgets.view.MultiStateView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/state_view"
+        app:msv_loadingView="@layout/layout_base_loading"
+        app:msv_errorView="@layout/layout_base_error"
+        app:msv_emptyView="@layout/layout_base_empty"
+        app:msv_animateViewChanges="true"
+        app:msv_viewState="loading">
+        
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical">
+            
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                />
+            
+        </ScrollView>
+        
+        
+    </com.mishou.common.widgets.view.MultiStateView>
+
+</LinearLayout>

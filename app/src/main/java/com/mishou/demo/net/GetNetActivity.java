@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.google.gson.reflect.TypeToken;
 import com.mishou.common.base.mvp.BaseMvpAppcompatActivity;
+import com.mishou.common.base.mvp.IBasePresenter;
 import com.mishou.common.demo.R;
 import com.mishou.common.net.OnlyHttp;
 import com.mishou.common.net.callback.CallBack;
@@ -14,8 +15,10 @@ import com.mishou.common.net.callback.CallClazzProxy;
 import com.mishou.common.net.exception.ApiException;
 import com.mishou.common.net.observer.CallBackSubscriber;
 import com.mishou.demo.Constants;
+import com.mishou.demo.bean.ApiResult5Bean;
 import com.mishou.demo.bean.CustomApi;
 import com.mishou.demo.bean.NowResult;
+import com.mishou.demo.bean.TestApiResult5;
 import com.orhanobut.logger.Logger;
 
 import java.util.LinkedHashMap;
@@ -38,7 +41,7 @@ public class GetNetActivity extends BaseMvpAppcompatActivity {
 
 
     @Override
-    public Object createPresenter() {
+    public IBasePresenter createPresenter() {
         return null;
     }
 
@@ -79,13 +82,46 @@ public class GetNetActivity extends BaseMvpAppcompatActivity {
             @Override
             public void onClick(View view) {
 
-                sendGet();
+//                sendGet();
+
+                get_clazzproxy();
             }
         });
 
 
 
 
+    }
+
+    private void get_clazzproxy() {
+
+        OnlyHttp.get("http://news-at.zhihu.com/api/3/sections")
+                .execute(new CallClazzProxy<TestApiResult5<List<ApiResult5Bean>>, List<ApiResult5Bean>>(new TypeToken<List<ApiResult5Bean>>(){}.getType()){})
+                .subscribe(new CallBackSubscriber<List<ApiResult5Bean>>(this, new CallBack<List<ApiResult5Bean>>() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                        Logger.d("oncompleted");
+                    }
+
+                    @Override
+                    public void onError(ApiException e) {
+
+                        Logger.d("error"+e);
+                    }
+
+                    @Override
+                    public void onSuccess(List<ApiResult5Bean> apiResult5Beans) {
+
+                        Logger.d("onsuccess"+apiResult5Beans);
+
+                    }
+                }));
     }
 
     private void sendGet() {
@@ -105,7 +141,7 @@ public class GetNetActivity extends BaseMvpAppcompatActivity {
                 .addParams("unit","m")
 //                .execute(NowResult.class)
                 .execute(new CallClazzProxy<CustomApi<List<NowResult>>,
-                                List<NowResult>>(new TypeToken<List<NowResult>>(){}.getType()))
+                                List<NowResult>>(new TypeToken<List<NowResult>>(){}.getType()){})
                 .subscribe(new CallBackSubscriber<List<NowResult>>(this, new CallBack<List<NowResult>>() {
                     @Override
                     public void onStart() {

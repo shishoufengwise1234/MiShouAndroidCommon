@@ -5,6 +5,8 @@ import com.mishou.common.net.model.ApiResult;
 /**
  * Created by ${shishoufeng} on 17/11/17.
  * email:shishoufeng1227@126.com
+ *
+ * 自定义 ApiResult 处理数据
  */
 
 public class HistoryData<T> extends ApiResult<T>{
@@ -16,8 +18,11 @@ public class HistoryData<T> extends ApiResult<T>{
      * error_code : 0
      */
 
+    //reson 重写 msg字段
     public String reason;
+    // error_code 复写 code 字段
     public int error_code;
+    //result 复写 data 字段
     public T result;
 
 

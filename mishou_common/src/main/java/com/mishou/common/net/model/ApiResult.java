@@ -3,9 +3,11 @@ package com.mishou.common.net.model;
 /**
  * Created by ${shishoufeng} on 17/11/14.
  * email:shishoufeng1227@126.com
- *
- *
- * 封装标准 restful 格式 返回数据
+ * <p>
+ * <p>
+ * 封装标准 ApiResult 格式 返回数据
+ * <p>
+ * 对 API result 进行拓展时需 extends ApiResult<T>
  */
 
 public class ApiResult<T> {
@@ -38,7 +40,9 @@ public class ApiResult<T> {
         this.data = data;
     }
 
-    //判断数据是否正确
+    /**
+     * 判断数据是否正确
+     */
     public boolean isOk() {
         return code == 0;
     }

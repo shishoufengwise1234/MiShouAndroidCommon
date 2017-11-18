@@ -10,5 +10,8 @@ package com.mishou.common.net.callback;
 public interface ProgressCancelListener {
 
 
+    /**
+     * 取消对话框回调
+     */
     void onCancelProgress();
 }
