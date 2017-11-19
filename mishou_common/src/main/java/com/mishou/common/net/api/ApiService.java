@@ -45,7 +45,7 @@ public interface ApiService {
      * @param maps 参数 map
      * @return Observable
      */
-    @POST()
+    @POST
     @FormUrlEncoded
     Observable<ResponseBody> post(@Url String url, @FieldMap Map<String, String> maps);
 
@@ -57,7 +57,7 @@ public interface ApiService {
      * @param object class对象
      * @return Observable
      */
-    @POST()
+    @POST
     Observable<ResponseBody> postBody(@Url String url, @Body Object object);
 
     /**
@@ -67,7 +67,7 @@ public interface ApiService {
      * @param maps 参数
      * @return Observable
      */
-    @GET()
+    @GET
     Observable<ResponseBody> get(@Url String url, @QueryMap Map<String, String> maps);
 
     /**
@@ -77,7 +77,7 @@ public interface ApiService {
      * @param maps 参数
      * @return Observable
      */
-    @DELETE()
+    @DELETE
     Observable<ResponseBody> delete(@Url String url, @QueryMap Map<String, String> maps);
 
     /**
@@ -87,7 +87,7 @@ public interface ApiService {
      * @param maps 参数
      * @return Observable
      */
-    @PUT()
+    @PUT
     Observable<ResponseBody> put(@Url String url, @QueryMap Map<String, String> maps);
 
     /**
@@ -97,7 +97,7 @@ public interface ApiService {
      * @param object class 对象
      * @return Observable
      */
-    @POST()
+    @POST
     Observable<ResponseBody> putBody(@Url String url, @Body Object object);
 
 
@@ -109,7 +109,7 @@ public interface ApiService {
      * @return Observable
      */
     @Multipart
-    @POST()
+    @POST
     Observable<ResponseBody> uploadFiles(@Url String url, @PartMap() Map<String, RequestBody> maps);
 
     /**
@@ -120,7 +120,7 @@ public interface ApiService {
      * @return Observable
      */
     @Multipart
-    @POST()
+    @POST
     Observable<ResponseBody> uploadFiles(@Url String url, @Part() List<MultipartBody.Part> parts);
 
     /**
@@ -140,7 +140,7 @@ public interface ApiService {
      * @param jsonBody json 请求体
      * @return Observable
      */
-    @POST()
+    @POST
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     Observable<ResponseBody> postJson(@Url String url, @Body RequestBody jsonBody);
 
@@ -151,6 +151,6 @@ public interface ApiService {
      * @param body 请求体
      * @return Observable
      */
-    @POST()
+    @POST
     Observable<ResponseBody> postBody(@Url String url, @Body RequestBody body);
 }

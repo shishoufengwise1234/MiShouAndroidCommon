@@ -19,7 +19,6 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import retrofit2.http.Body;
 
 /**
  * Created by ${shishoufeng} on 17/11/14.
@@ -81,7 +80,7 @@ public abstract class BaseBodyRequest<R extends BaseBodyRequest> extends BaseReq
         return (R) this;
     }
 
-    public R object(@Body Object object) {
+    public R object(Object object) {
         this.object = object;
         return (R) this;
     }

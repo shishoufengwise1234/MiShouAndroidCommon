@@ -25,6 +25,9 @@ public class SchedulerUtils {
 
     /**
      * io 线程发送数据 main 订阅事件
+     *
+     * 不添加任何转换器
+     *
      * @return ObservableTransformer
      */
     public static <T> ObservableTransformer<T, T> ioAndMain() {

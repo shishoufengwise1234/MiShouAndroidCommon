@@ -71,8 +71,10 @@ public class OnlyConstants {
         public static final int REQUEST_CANCEL = CAST_ERROR + 1;
         /**
          * 未知主机错误
+         *
+         * 没有网络
          */
-        public static final int UNKNOWNHOST_ERROR = REQUEST_CANCEL + 1;
+        public static final int UNKNOWNHOST_ERROR = 10009;
 
         /**
          * 空指针错误

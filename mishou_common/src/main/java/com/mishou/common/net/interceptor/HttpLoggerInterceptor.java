@@ -29,11 +29,11 @@ import okio.BufferedSource;
 /**
  * Created by ${shishoufeng} on 17/11/13.
  * email:shishoufeng1227@126.com
- *
+ * <p>
  * 自定义网络拦截器
  */
 
-public class HttpLoggerInterceptor implements Interceptor{
+public class HttpLoggerInterceptor implements Interceptor {
 
     private static final String TAG = "OkHttp";
 
@@ -44,28 +44,34 @@ public class HttpLoggerInterceptor implements Interceptor{
 
     private int level = NONE;
 
-    /**不打印日志*/
+    /**
+     * 不打印日志
+     */
     public static final int NONE = 1;
-    /**打印body日志*/
+    /**
+     * 打印body日志
+     */
     public static final int BODY = 3;
 
     //log 输出等级
-    @IntDef({NONE,BODY})
+    @IntDef({NONE, BODY})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Level{}
+    public @interface Level {
+    }
 
     /**
      * 设置打印级别
+     *
      * @param level 级别
      */
-    public void setLevel(@Level int level){
+    public void setLevel(@Level int level) {
         this.level = level;
     }
 
-    public HttpLoggerInterceptor (@NonNull String tag, boolean isPrint){
-        if (tag == null){
+    public HttpLoggerInterceptor(@NonNull String tag, boolean isPrint) {
+        if (tag == null) {
             this.tag = TAG;
-        }else{
+        } else {
             this.tag = tag;
         }
         this.isPrint = isPrint;
@@ -76,29 +82,30 @@ public class HttpLoggerInterceptor implements Interceptor{
 
         Request request = chain.request();
 
-        if (isPrint){
+        if (isPrint) {
 
-            if (level == NONE){ //不打印日志
-                LogUtils.d("HttpLoggerInterceptor level = NONE"+level);
+            if (level == NONE) { //不打印日志
+                LogUtils.d("HttpLoggerInterceptor level = NONE" + level);
 
                 return chain.proceed(request);
-            }else{
+            } else {
 
-                return printHttpLog(request,chain);
+                return printHttpLog(request, chain);
             }
-        }else{
+        } else {
             return chain.proceed(request);
         }
     }
 
     /**
      * 打印log
+     *
      * @param request
      * @param chain
      * @return
      * @throws IOException
      */
-    private Response printHttpLog(Request request,Chain chain) throws IOException{
+    private Response printHttpLog(Request request, Chain chain) throws IOException {
 
         //log 信息
         StringBuilder builder = new StringBuilder();
@@ -160,54 +167,43 @@ public class HttpLoggerInterceptor implements Interceptor{
         builder.append("\n请求参数:---end");
 
         long startNs = System.nanoTime();
-        Response response;
-        try {
-            response = chain.proceed(request);
+        Response response = chain.proceed(request);
 
-            long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
+        long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
 
-            ResponseBody responseBody = response.body();
-            long contentLength = responseBody.contentLength();
-            builder.append("\n<-- 请求code: " + response.code() + "  请求状态: " + response.message() + "  请求地址: "
-                    + response.request().url() + " 用时:(" + tookMs + "ms)");
+        ResponseBody responseBody = response.body();
+        long contentLength = responseBody.contentLength();
+        builder.append("\n<-- 请求code: " + response.code() + "  请求状态: " + response.message() + "  请求地址: "
+                + response.request().url() + " 用时:(" + tookMs + "ms)");
 
-            BufferedSource source = responseBody.source();
-            source.request(Long.MAX_VALUE); // Buffer the entire body.
-            Buffer buffer = source.buffer();
+        BufferedSource source = responseBody.source();
+        source.request(Long.MAX_VALUE); // Buffer the entire body.
+        Buffer buffer = source.buffer();
 
-            Charset charset = UTF8;
-            MediaType contentType = responseBody.contentType();
-            if (contentType != null) {
-                try {
-                    charset = contentType.charset(UTF8);
-                } catch (UnsupportedCharsetException e) {
-                    builder.append("\nCouldn't decode the response body; charset is likely malformed.");
-                    builder.append("\n<-- END HTTP");
+        Charset charset = UTF8;
+        MediaType contentType = responseBody.contentType();
+        if (contentType != null) {
+            try {
+                charset = contentType.charset(UTF8);
+            } catch (UnsupportedCharsetException e) {
+                builder.append("\nCouldn't decode the response body; charset is likely malformed.");
+                builder.append("\n<-- END HTTP");
 
-                    return response;
-                }
-            }
-
-            if (!isPlaintext(buffer)) {
-                builder.append("\n<-- END HTTP (binary " + buffer.size() + "-byte body omitted)");
                 return response;
             }
-
-            if (contentLength != 0) {
-                builder.append("\n返回数据:");
-                builder.append("\n" + buffer.clone().readString(charset));
-            }
-
-            builder.append("\n<-- 请求结束 END HTTP (" + buffer.size() + "-byte body)");
-
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            throw e;
-        } catch (Exception e) {
-            e.printStackTrace();
-            builder.append("\n<-- 请求出错: " + e);
-            throw e;
         }
+
+        if (!isPlaintext(buffer)) {
+            builder.append("\n<-- END HTTP (binary " + buffer.size() + "-byte body omitted)");
+            return response;
+        }
+
+        if (contentLength != 0) {
+            builder.append("\n返回数据:");
+            builder.append("\n" + buffer.clone().readString(charset));
+        }
+
+        builder.append("\n<-- 请求结束 END HTTP (" + buffer.size() + "-byte body)");
 
         Logger.t(tag).d("请求信息如下:\n" + builder);
 
@@ -240,8 +236,9 @@ public class HttpLoggerInterceptor implements Interceptor{
 
     /**
      * 判断body 是否含有参数
+     *
      * @param headers 请求头
-     * @return  true body 不含参数 false 则包含
+     * @return true body 不含参数 false 则包含
      */
     private boolean bodyEncoded(Headers headers) {
         String contentEncoding = headers.get("Content-Encoding");

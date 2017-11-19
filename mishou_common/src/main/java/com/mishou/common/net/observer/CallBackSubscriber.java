@@ -7,6 +7,7 @@ import android.support.annotation.RequiresPermission;
 import com.mishou.common.net.callback.CallBack;
 import com.mishou.common.net.callback.ProgressCallBack;
 import com.mishou.common.net.exception.ApiException;
+import com.mishou.common.net.util.OnlyLog;
 
 import io.reactivex.annotations.NonNull;
 
@@ -33,6 +34,7 @@ public class CallBackSubscriber<T> extends BaseSubscriber<T> {
     @Override
     protected void onStart() {
         super.onStart();
+        OnlyLog.d("CallBackSubscriber -> onStart()");
         if (mCallBack != null)
             mCallBack.onStart();
     }
@@ -40,6 +42,7 @@ public class CallBackSubscriber<T> extends BaseSubscriber<T> {
     @Override
     public void onNext(@NonNull T t) {
         super.onNext(t);
+        OnlyLog.d("CallBackSubscriber -> onNext()");
         if (mCallBack != null)
             mCallBack.onSuccess(t);
     }
@@ -47,6 +50,7 @@ public class CallBackSubscriber<T> extends BaseSubscriber<T> {
     @Override
     public void onComplete() {
         super.onComplete();
+        OnlyLog.d("CallBackSubscriber -> onComplete()");
         if (mCallBack != null)
             mCallBack.onCompleted();
 
@@ -54,6 +58,7 @@ public class CallBackSubscriber<T> extends BaseSubscriber<T> {
 
     @Override
     protected void onErrorMessage(ApiException exception) {
+        OnlyLog.d("CallBackSubscriber -> onErrorMessage()");
         if (mCallBack != null)
             mCallBack.onError(exception);
     }

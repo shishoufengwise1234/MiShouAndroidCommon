@@ -5,15 +5,22 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mishou.common.net.OnlyHttp;
 import com.mishou.common.net.api.ApiService;
+import com.mishou.common.net.callback.CallBackProxy;
+import com.mishou.common.net.function.ApiResultFunction;
+import com.mishou.common.net.function.RetryFunction;
 import com.mishou.common.net.https.HttpsUtils;
 import com.mishou.common.net.interceptor.HttpHeaderInterceptor;
+import com.mishou.common.net.model.ApiResult;
 import com.mishou.common.net.model.HttpParams;
 import com.mishou.common.net.util.OnlyLog;
 import com.mishou.common.net.util.OnlyUtils;
+import com.mishou.common.net.util.SchedulerUtils;
 
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -97,8 +104,8 @@ public abstract class BaseRequest<R extends BaseRequest> {
 
 
     public BaseRequest(String url) {
-        OnlyLog.d("BaseRequest > url ="+url+" class name > "+className);
-        this.url = OnlyUtils.checkNotNull(url,"url(base) is null");
+        OnlyLog.d("BaseRequest > url =" + url + " class name > " + className);
+        this.url = OnlyUtils.checkNotNull(url, "url(base) is null");
 
         OnlyHttp config = OnlyHttp.getInstance();
 
@@ -132,7 +139,8 @@ public abstract class BaseRequest<R extends BaseRequest> {
 
     /**
      * 局部设置 base URL
-     * @param baseUrl  baseUrl
+     *
+     * @param baseUrl baseUrl
      */
     public R baseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
@@ -153,9 +161,10 @@ public abstract class BaseRequest<R extends BaseRequest> {
 
     /**
      * 支持设置外部gson 对象解析数据
+     *
      * @param gson
      */
-    public R gson(Gson gson){
+    public R gson(Gson gson) {
         this.baseGson = gson;
         return (R) this;
     }
@@ -240,6 +249,7 @@ public abstract class BaseRequest<R extends BaseRequest> {
         this.baseHeaders.put(key, value);
         return (R) this;
     }
+
     /**
      * 添加头信息
      */
@@ -247,6 +257,7 @@ public abstract class BaseRequest<R extends BaseRequest> {
         this.baseHeaders.putAll(headers);
         return (R) this;
     }
+
     /**
      * 添加参数
      */
@@ -254,10 +265,11 @@ public abstract class BaseRequest<R extends BaseRequest> {
         this.baseParams.put(key, value);
         return (R) this;
     }
+
     /**
      * 添加参数
      */
-    public R addParams(Map<String,String> map){
+    public R addParams(Map<String, String> map) {
         this.baseParams.put(map);
         return (R) this;
     }
@@ -295,6 +307,31 @@ public abstract class BaseRequest<R extends BaseRequest> {
      */
     protected abstract Observable<ResponseBody> createObservable();
 
+
+    /**
+     * 对 Observable 进行改造
+     * 1、添加结果转换器
+     * 2、添加失败重试机制
+     *
+     * @param observable 目标 observable
+     * @param proxy      CallBackProxy 目标代理类
+     * @param <T>        目标class 对象 APIResult -> T
+     * @return Observable<T>
+     */
+    protected <T> Observable<T> toObservable(Observable observable, CallBackProxy<? extends ApiResult<T>, T> proxy) {
+        Type type;
+        if (proxy != null) {
+            type = proxy.getType();
+        } else {
+            type = new TypeToken<ResponseBody>() {
+            }.getType();
+        }
+
+        return observable.map(new ApiResultFunction(this.baseGson, type))
+                .compose(isSyncRequest ? SchedulerUtils.<T>main() : SchedulerUtils.<T>io_main())
+                .retryWhen(new RetryFunction(retryCount, retryDelay, retryIncreaseDelay));
+
+    }
 
     /**
      * 根据当前的请求参数，生成对应的OkHttpClient
