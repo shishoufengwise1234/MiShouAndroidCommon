@@ -15,6 +15,10 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+
     }
 
     buildTypes {
@@ -54,5 +58,4 @@ dependencies {
     compile rootProject.ext.dependencies["umeng-analytics"]
 
 
-    compile files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
 }

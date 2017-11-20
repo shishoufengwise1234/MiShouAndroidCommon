@@ -11,6 +11,7 @@ import com.mishou.common.demo.R;
 import com.mishou.common.utils.ui.JumpUtils;
 import com.mishou.demo.history.HistoryActivity;
 import com.mishou.demo.net.HttpMainActivity;
+import com.mishou.demo.webview.BaseWebViewActivity;
 import com.mishou.demo.zhihu.ZhihuActivity;
 
 import butterknife.BindView;
@@ -76,11 +77,11 @@ public class MainActivity extends BaseMvpAppcompatActivity {
 
 
     @OnClick({R.id.btn_image_loader, R.id.btn_image_picker,
-            R.id.btn_http, R.id.btn_mvp,R.id.btn_zhihu,R.id.btn_history})
+            R.id.btn_http, R.id.btn_mvp, R.id.btn_zhihu, R.id.btn_history, R.id.btn_webview})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_image_loader:
-                JumpUtils.startActivity(this,ImageLoaderActivity.class);
+                JumpUtils.startActivity(this, ImageLoaderActivity.class);
                 break;
             case R.id.btn_image_picker:
                 break;
@@ -93,9 +94,12 @@ public class MainActivity extends BaseMvpAppcompatActivity {
             case R.id.btn_zhihu:
                 JumpUtils.startActivity(mContext, ZhihuActivity.class);
                 break;
-                case R.id.btn_history:
-                    JumpUtils.startActivity(this, HistoryActivity.class);
-                    break;
+            case R.id.btn_history:
+                JumpUtils.startActivity(this, HistoryActivity.class);
+                break;
+            case R.id.btn_webview:
+                JumpUtils.startActivity(this, BaseWebViewActivity.class);
+                break;
         }
     }
 }

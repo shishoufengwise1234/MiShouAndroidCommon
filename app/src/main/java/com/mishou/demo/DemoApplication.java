@@ -11,6 +11,7 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+import com.tencent.smtt.sdk.QbSdk;
 
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -57,6 +58,21 @@ public class DemoApplication extends BaseApplication {
 
 
         initLogger();
+
+        //加载x5内核
+        QbSdk.initX5Environment(getApplicationContext(), new QbSdk.PreInitCallback() {
+            @Override
+            public void onCoreInitFinished() {
+
+                Logger.d("onCoreInitFinished");
+            }
+
+            @Override
+            public void onViewInitFinished(boolean b) {
+
+                Logger.d("onViewInitFinished  "+b);
+            }
+        });
     }
 
     private void initLogger() {

@@ -79,7 +79,7 @@ public class BaseWebView extends WebView {
         /***
          * 不允许进行缩放
          */
-        settings.setBuiltInZoomControls(false);
+        settings.setBuiltInZoomControls(true);
         /**
          * 取消右下方缩放按钮
          */
@@ -387,10 +387,13 @@ public class BaseWebView extends WebView {
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
             if (newProgress == 100) {
-                mProgress.setVisibility(View.GONE);
+                if (mProgress != null)
+                    mProgress.setVisibility(View.GONE);
             } else {
-                mProgress.setVisibility(View.VISIBLE);
-                mProgress.setProgress(newProgress);
+                if (mProgress != null) {
+                    mProgress.setVisibility(View.VISIBLE);
+                    mProgress.setProgress(newProgress);
+                }
             }
         }
     }
@@ -558,7 +561,7 @@ public class BaseWebView extends WebView {
 //            float contentHeight = getContentHeight() * getScale();
 //            // 当前内容高度下从未触发过, 浏览器存在滚动条且滑动到将抵底部位置
 //            if (mCurrContentHeight != contentHeight && newY > 0 && contentHeight <= newY + getHeight() + mThreshold) {
-//                // TODO Something...
+//
 //                mCurrContentHeight = contentHeight;
 //            }
 //    }

@@ -1,1 +1,1 @@
-include ':app', ':mishou_common'
+include ':app', ':mishou_common', ':X5WebDemo'

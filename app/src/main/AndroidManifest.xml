@@ -9,6 +9,9 @@
     
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    
     
     <application
         android:name="com.mishou.demo.DemoApplication"
@@ -41,6 +44,7 @@
         
         <activity android:name="com.mishou.demo.history.HistoryActivity"/>
         <activity android:name="com.mishou.demo.history.HistoryDetailsActivity"/>
+        <activity android:name="com.mishou.demo.webview.BaseWebViewActivity"/>
         
     </application>
 

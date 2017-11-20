@@ -109,7 +109,7 @@ public class HistoryDetailsPresenterImpl implements HistoryDetailsContract.Prese
 
         //直接使用 callback 回调获取数据
         OnlyHttp.post(Constants.HISTORY_DETAILS)
-//                .addParams(params) //直接添加参数
+                .addParams(params) //直接添加参数
                 .object(request) //使用对象传参数
                 .execute(new CallBackProxy<HistoryData<List<HistoryDetailsBean>>, List<HistoryDetailsBean>>(new CallBack<List<HistoryDetailsBean>>() {
                     @Override

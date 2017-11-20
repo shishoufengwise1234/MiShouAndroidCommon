@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>测试JavaScript和native 交互</title>
+
+
+    <p>
+        TBS不仅提供了强大的网页浏览功能，更提供了强大的页面H5视频播放支持，播放器同时支持页面，小窗，全屏播放体验，强大的解码能力，包括mp4，rmvb，flv，avi等26种视频格式支持。
+
+        TBS播放器的播放场景不仅局限于H5页面播放，也可以接入一般的视频流链接，比如本地文件，网络的视频流链接。开发者如果想播放一个视频链接，在不自己开发播放器的前提下，一般做法是将视频的播放链接放到一个Intent里面，抛给系统的播放器进行播放，那么当你集成了TBS后，你只需要通过简单的方式接入视频播放调用接口，这样你不需要写任何一句关于播放器的代码，就可以享受一个本地播放器体验，播放视频再不需要Intent来跨App、跨进程的调用了。
+    </p>
+
+</head>
+
+<body>
+
+
+<button onclick="TestNativeLog()">点击测试native 中方法</button>
+
+
+<script type="text/javascript">
+
+
+     //测试 native 调用js 中的方法
+    function TestConsoleLog() {
+        console.log("native log");
+    }
+
+    function testAlert() {
+        alert("alert");
+    }
+
+    //测试js调用 native 中的方法
+    function TestNativeLog() {
+
+            mTest.TestLog("我是在web 中调用的！");
+
+    }
+
+
+
+</script>
+</body>
+
+
+</html>
