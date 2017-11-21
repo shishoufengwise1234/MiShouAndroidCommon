@@ -19,6 +19,9 @@ android {
         // dex突破65535的限制
         multiDexEnabled true
 
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
 
     }
     buildTypes {
@@ -27,7 +30,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '26.0.2'
+
 }
 
 dependencies {

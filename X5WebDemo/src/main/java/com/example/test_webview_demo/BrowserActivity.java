@@ -504,7 +504,7 @@ public class BrowserActivity extends Activity {
 	public static final int MSG_INIT_UI = 1;
 	private final int mUrlStartNum = 0;
 	private int mCurrentUrl = mUrlStartNum;
-	private Handler mTestHandler = new Handler() {
+	private  Handler mTestHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
