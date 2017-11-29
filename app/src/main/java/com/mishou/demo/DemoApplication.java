@@ -11,6 +11,7 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.smtt.sdk.QbSdk;
 
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -32,7 +33,8 @@ public class DemoApplication extends BaseApplication {
     protected void onAttach(Context base) {
 
 
-
+        //初始化 leakcanary
+        LeakCanary.install(this);
 
     }
 
@@ -73,6 +75,9 @@ public class DemoApplication extends BaseApplication {
                 Logger.d("onViewInitFinished  "+b);
             }
         });
+
+
+
     }
 
     private void initLogger() {

@@ -15,12 +15,26 @@ import java.lang.reflect.Type;
 
 public abstract class CallBack<T> implements IType<T>{
 
+    /**
+     * 开始订阅时调用
+     */
     public abstract void onStart();
 
+    /**
+     * 完成之后回调
+     */
     public abstract void onCompleted();
 
+    /**
+     * 出现异常回调
+     * @param e 自定义异常
+     */
     public abstract void onError(ApiException e);
 
+    /**
+     * 结果完成之后回调
+     * @param t 数据
+     */
     public abstract void onSuccess(T t);
 
 

@@ -1,9 +1,13 @@
 package com.mishou.demo;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.mishou.common.base.mvp.BaseMvpAppcompatActivity;
 import com.mishou.common.base.mvp.IBasePresenter;
@@ -77,7 +81,8 @@ public class MainActivity extends BaseMvpAppcompatActivity {
 
 
     @OnClick({R.id.btn_image_loader, R.id.btn_image_picker,
-            R.id.btn_http, R.id.btn_mvp, R.id.btn_zhihu, R.id.btn_history, R.id.btn_webview})
+            R.id.btn_http, R.id.btn_mvp, R.id.btn_zhihu, R.id.btn_history,
+            R.id.btn_webview,R.id.btn_share})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_image_loader:
@@ -99,6 +104,15 @@ public class MainActivity extends BaseMvpAppcompatActivity {
                 break;
             case R.id.btn_webview:
                 JumpUtils.startActivity(this, BaseWebViewActivity.class);
+                break;
+            case R.id.btn_share:
+                Uri uri = Uri.parse("market://details?id=" + this.getPackageName());
+                Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                try {
+                    startActivity(goToMarket);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(this, "Couldn't launch the market !", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }

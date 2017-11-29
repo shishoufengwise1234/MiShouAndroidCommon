@@ -15,6 +15,7 @@ import android.widget.Button;
 
 import com.mishou.common.base.BaseSupportFragment;
 import com.mishou.common.demo.R;
+import com.mishou.common.utils.ToastUtils;
 import com.mishou.common.widgets.webview.BaseWebView;
 import com.mishou.common.widgets.webview.callback.OnWebViewChromeListener;
 import com.mishou.common.widgets.webview.callback.OnWebViewClientListener;
@@ -35,6 +36,9 @@ public class NtiveFragment extends BaseSupportFragment {
 
     @BindView(R.id.btn_call_js)
     Button btnCallJs;
+
+    @BindView(R.id.btn_show)
+    Button btnShow;
 
 
     @Override
@@ -69,6 +73,69 @@ public class NtiveFragment extends BaseSupportFragment {
                 }
             }
         });
+
+        btnShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String params = "235";
+
+//                callJs("Show","sss");
+
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+
+                    baseWebView.loadUrl("javascript:Show("+params+")");
+
+                } else {
+                    baseWebView.evaluateJavascript("javascript:Show("+params+")", new ValueCallback<String>() {
+                        @Override
+                        public void onReceiveValue(String s) {
+
+                            Logger.d("onReceiveValue > " + s);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private void callJs(String jsMethod,String params){
+
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append("javascript")
+                .append(":")
+                .append(jsMethod);
+
+        if (params == null){
+            builder.append("()");
+        }else{
+            builder.append("(")
+                    .append("'")
+                    .append(params)
+                    .append("'")
+                    .append(")");
+        }
+
+        Logger.d("jsMethodName = "+builder);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            baseWebView.post(new Runnable() {
+                @Override
+                public void run() {
+                    baseWebView.loadUrl(builder.toString());
+
+                }
+            });
+        } else {
+            baseWebView.evaluateJavascript(builder.toString(), new ValueCallback<String>() {
+                @Override
+                public void onReceiveValue(String s) {
+
+                    Logger.d("onReceiveValue > " + s);
+                }
+            });
+        }
     }
 
     @Override
@@ -76,9 +143,14 @@ public class NtiveFragment extends BaseSupportFragment {
 
 
         Test mTest = new Test();
+        Test mtext = new Test();
         baseWebView.addMethod(mTest, "mTest");
 
-        baseWebView.setUrl("file:///android_asset/test_html.html");
+        baseWebView.addMethod(mtext,"mtext");
+
+//        baseWebView.setUrl("file:///android_asset/test_html.html");
+        baseWebView.setUrl("file:///android_asset/index.html");
+//        baseWebView.setUrl("file:///android_asset/test_html2.html");
 
 
         baseWebView.setOnWebViewClientListener(new OnWebViewClientListener() {
@@ -105,6 +177,8 @@ public class NtiveFragment extends BaseSupportFragment {
             @Override
             public boolean ShouldOverrideUrlLoading(WebView view, String url) {
                 Logger.d("ShouldOverrideUrlLoading >"+url);
+
+
                 return false;
             }
 
@@ -119,7 +193,10 @@ public class NtiveFragment extends BaseSupportFragment {
             @Override
             public boolean OnJsAlert(WebView view, String url, String message, JsResult result) {
                 Logger.d("OnJsAlert >"+message);
-                return false;
+
+                ToastUtils.showMessage(mActivity,message);
+
+                return true;
             }
 
             @Override
@@ -149,6 +226,12 @@ public class NtiveFragment extends BaseSupportFragment {
         public void TestLog(String msg) {
 
             Logger.d(msg);
+        }
+
+        @JavascriptInterface
+        public void makeText(String msg){
+
+            ToastUtils.showMessage(mActivity,msg);
         }
     }
 

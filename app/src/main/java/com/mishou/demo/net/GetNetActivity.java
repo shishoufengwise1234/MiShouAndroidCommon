@@ -17,6 +17,8 @@ import com.mishou.common.net.observer.CallBackSubscriber;
 import com.mishou.demo.Constants;
 import com.mishou.demo.bean.ApiResult5Bean;
 import com.mishou.demo.bean.CustomApi;
+import com.mishou.demo.bean.CustomData;
+import com.mishou.demo.bean.Data;
 import com.mishou.demo.bean.NowResult;
 import com.mishou.demo.bean.TestApiResult5;
 import com.orhanobut.logger.Logger;
@@ -84,13 +86,55 @@ public class GetNetActivity extends BaseMvpAppcompatActivity {
 
 //                sendGet();
 
-                get_clazzproxy();
+//                get_clazzproxy();
+
+                get_Custom();
             }
         });
 
 
 
 
+    }
+
+    private void get_Custom() {
+
+        Map<String, String> params = new LinkedHashMap<>();
+        params.put("key", "6c20603237eef36dd7c0d1fe9c402072");
+        params.put("address", "海淀上地金隅嘉华大厦");
+        params.put("city", "北京");
+
+
+        //返回 disposable 或者 observable 方便操作
+        OnlyHttp.get("/v3/geocode/geo") //get 访问
+                .baseUrl("http://restapi.amap.com")
+                .addParams(params)
+                .execute(new CallClazzProxy<CustomData<Data>,
+                        Data>(new TypeToken<Data>(){}.getType()) {
+                })
+                .subscribe(new CallBackSubscriber<Data>(this, new CallBack<Data>() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(ApiException e) {
+
+                        Logger.d("error "+e);
+                    }
+
+                    @Override
+                    public void onSuccess(Data s) {
+
+                        Logger.d("s"+s);
+                    }
+                }));
     }
 
     private void get_clazzproxy() {

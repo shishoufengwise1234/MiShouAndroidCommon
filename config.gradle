@@ -32,8 +32,8 @@ ext {
             "cardview"               : 'com.android.support:cardview-v7:26.1.0',
 
             /* 检测内存泄漏工具  https://github.com/square/leakcanary */
-            "debug_leakcanary"       : 'com.squareup.leakcanary:leakcanary-android:1.4-beta2',
-            "release_leakcanary"     : 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2',
+            "debug_leakcanary"       : 'com.squareup.leakcanary:leakcanary-android:1.5.4',
+            "release_leakcanary"     : 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4',
 
             //log 打印工具
             "logger"                 : 'com.orhanobut:logger:2.1.0',
@@ -69,7 +69,7 @@ ext {
             //响应式编程相关
             "rxjava2-adapter"        : 'com.squareup.retrofit2:adapter-rxjava2:2.3.0',
             "rxandroid"              : 'io.reactivex.rxjava2:rxandroid:2.0.1',
-            "rxjava2"                : 'io.reactivex.rxjava2:rxjava:2.1.0',
+            "rxjava2"                : 'io.reactivex.rxjava2:rxjava:2.1.1',
 
             //rxliferecycle 相关
             "rxlifecycle2"           : 'com.trello.rxlifecycle2:rxlifecycle:2.1.0',

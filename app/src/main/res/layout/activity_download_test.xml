@@ -7,13 +7,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_call_js"
-        android:text="调用JavaScript方法"/>
-    
-    <com.mishou.demo.webview.X5WebView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/wb_tbs"
-        />
+        android:id="@+id/btn_start_download"
+        android:text="下载apk测试"/>
 
 </LinearLayout>

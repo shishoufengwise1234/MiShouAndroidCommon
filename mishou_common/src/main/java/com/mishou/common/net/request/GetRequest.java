@@ -105,6 +105,9 @@ public class GetRequest extends BaseRequest<GetRequest> {
                 .subscribeWith(new CallBackSubscriber<T>(baseContext, proxy.getCallBack()));
     }
 
+
+
+
     @Override
     protected Observable<ResponseBody> createObservable() {
         return apiService.get(url, baseParams.getUrlParamsMap());

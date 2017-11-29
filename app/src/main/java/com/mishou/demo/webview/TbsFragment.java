@@ -23,7 +23,7 @@ public class TbsFragment extends BaseSupportFragment {
 
 
     @BindView(R.id.wb_tbs)
-    TbsWebView wbTbs;
+    X5WebView wbTbs;
 
     @BindView(R.id.btn_call_js)
     Button btnCallJs;
@@ -72,10 +72,9 @@ public class TbsFragment extends BaseSupportFragment {
     protected void onLogic(Bundle savedInstanceState) {
 
         Test mTest = new Test();
-        wbTbs.addMethod(mTest, "mTest");
+        wbTbs.addJavascriptInterface(mTest, "mTest");
 
         wbTbs.loadUrl("file:///android_asset/test_tbs.html");
-
 
     }
 

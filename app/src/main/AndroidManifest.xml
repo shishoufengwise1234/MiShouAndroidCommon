@@ -46,6 +46,8 @@
         <activity android:name="com.mishou.demo.history.HistoryDetailsActivity"/>
         <activity android:name="com.mishou.demo.webview.BaseWebViewActivity"/>
         
+        <activity android:name="com.mishou.demo.net.DownloadActivity"/>
+        
     </application>
 
 </manifest>

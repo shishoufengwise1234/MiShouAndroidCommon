@@ -86,6 +86,12 @@ public class OnlyConstants {
          */
         public static final int RESULT_CAST_ERROR = 2000;
 
+        /**
+         * 下载文件出错
+         */
+        public static final int DOWNLOAD_FILE_ERROR = 2001;
+
+
     }
 
 }

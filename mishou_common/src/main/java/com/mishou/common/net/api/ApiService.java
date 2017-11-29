@@ -7,7 +7,6 @@ import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
@@ -131,7 +130,7 @@ public interface ApiService {
      */
     @Streaming
     @GET
-    Call<ResponseBody> downloadFile(@Url String fileUrl);
+    Observable<ResponseBody> downloadFile(@Url String fileUrl);
 
     /**
      * 发送json 数据

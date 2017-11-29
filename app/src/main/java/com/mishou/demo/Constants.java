@@ -28,5 +28,6 @@ public class Constants {
     public static final String HISTORY_DETAILS = "http://v.juhe.cn/todayOnhistory/queryDetail.php";
 //    public static final String HISTORY_DETAILS = "http://e.cmall.motorsc.com/user/userLogin.do";
 
-    
+    public static final String DOWNLOAD_TEST = "http://imtt.dd.qq.com/16891/A4DC4AF970B09E2751C2C3729DE24A55.apk?fsname=com.wuba_7.17.1_71701.apk&csr=1bbd";
+
 }

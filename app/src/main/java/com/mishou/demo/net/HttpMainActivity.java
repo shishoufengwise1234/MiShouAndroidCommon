@@ -84,6 +84,7 @@ public class HttpMainActivity extends BaseMvpActivity {
             case R.id.btn_post:
                 break;
             case R.id.btn_download:
+                JumpUtils.startActivity(this,DownloadActivity.class);
                 break;
             case R.id.btn_upload:
                 break;

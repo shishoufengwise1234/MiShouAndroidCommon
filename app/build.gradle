@@ -43,6 +43,9 @@ dependencies {
 
     compile rootProject.ext.dependencies["multidex"]
 
+
+    compile rootProject.ext.dependencies["debug_leakcanary"]
+
 //    compile rootProject.ext.de
 
     compile project(':mishou_common')
