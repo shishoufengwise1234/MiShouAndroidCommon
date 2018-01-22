@@ -27,11 +27,7 @@
         </activity>
         
         <activity android:name="com.mishou.demo.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
         
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         
         <activity android:name="com.mishou.demo.net.GetNetActivity"/>
@@ -44,7 +40,13 @@
         
         <activity android:name="com.mishou.demo.history.HistoryActivity"/>
         <activity android:name="com.mishou.demo.history.HistoryDetailsActivity"/>
-        <activity android:name="com.mishou.demo.webview.BaseWebViewActivity"/>
+        <activity android:name="com.mishou.demo.webview.BaseWebViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+        
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         
         <activity android:name="com.mishou.demo.net.DownloadActivity"/>
         

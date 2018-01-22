@@ -51,6 +51,7 @@ ext {
             //图片加载
             "glide"                  : 'com.github.bumptech.glide:glide:4.3.1',
             "glide-compiler"         : 'com.github.bumptech.glide:compiler:4.3.1',
+            "glide_okhttp"           : 'com.github.bumptech.glide:okhttp3-integration:4.3.1',
             //下载picasso源码  maven私服aar文件
 //            "picasso"               : 'com.squareup.picasso:picasso:2.5.3@aar',
             "picasso"                : 'com.squareup.picasso:picasso:2.5.2',

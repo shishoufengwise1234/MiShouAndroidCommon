@@ -33,8 +33,7 @@ public class DemoApplication extends BaseApplication {
     protected void onAttach(Context base) {
 
 
-        //初始化 leakcanary
-        LeakCanary.install(this);
+
 
     }
 
@@ -50,6 +49,9 @@ public class DemoApplication extends BaseApplication {
 
         OnlyHttp.getInstance()
                 .init(mContext)
+                .setRetryCount(3)
+                .setRetryDelay(1000)
+                .setRetryIncreaseDelay(1000)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .setBaseUrl(Constants.WEATHER_BASE)
@@ -76,6 +78,9 @@ public class DemoApplication extends BaseApplication {
             }
         });
 
+
+        //初始化 leakcanary
+        LeakCanary.install(this);
 
 
     }

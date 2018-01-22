@@ -1,1 +1,1 @@
-include ':app', ':mishou_common', ':widgetsLibrary'
+include ':app', ':widgetsLibrary', ':push_library', ':common'

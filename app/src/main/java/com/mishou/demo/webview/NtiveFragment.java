@@ -39,7 +39,12 @@ public class NtiveFragment extends BaseSupportFragment {
 
     @BindView(R.id.btn_show)
     Button btnShow;
+    
+//    public static final String VEDIO_TEST = "file:///android_asset/test_video.html";
+    public static final String VEDIO_TEST = "http://39.106.13.53:7772/#/buy";
 
+
+    private String test_token = "1234";
 
     @Override
     protected int getLayoutView() {
@@ -58,12 +63,13 @@ public class NtiveFragment extends BaseSupportFragment {
                     baseWebView.post(new Runnable() {
                         @Override
                         public void run() {
-                            baseWebView.loadUrl("javascript:testAlert()");
+//                            baseWebView.loadUrl("javascript:testAlert()");
+                            baseWebView.loadUrl("javascript:setToken("+test_token+")");
 
                         }
                     });
                 } else {
-                    baseWebView.evaluateJavascript("javascript:testAlert()", new ValueCallback<String>() {
+                    baseWebView.evaluateJavascript("javascript:setToken("+test_token+")", new ValueCallback<String>() {
                         @Override
                         public void onReceiveValue(String s) {
 
@@ -149,7 +155,9 @@ public class NtiveFragment extends BaseSupportFragment {
         baseWebView.addMethod(mtext,"mtext");
 
 //        baseWebView.setUrl("file:///android_asset/test_html.html");
-        baseWebView.setUrl("file:///android_asset/index.html");
+//        baseWebView.setUrl("file:///android_asset/index.html");
+//        baseWebView.setUrl(VEDIO_TEST);
+        baseWebView.setUrl(VEDIO_TEST);
 //        baseWebView.setUrl("file:///android_asset/test_html2.html");
 
 

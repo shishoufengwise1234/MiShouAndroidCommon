@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--自定义原型头像-->
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension"/>
+        <attr name="border_color" format="color"/>
+        <attr name="onDrawable" format="reference"/>
+        <attr name="offDrawable" format="reference"/>
+        <attr name="thumbDrawable" format="reference"/>
+        <attr name="thumb_margin" format="dimension|reference"/>
+        <attr name="thumb_marginTop" format="dimension|reference"/>
+        <attr name="thumb_marginBottom" format="dimension|reference"/>
+        <attr name="thumb_marginLeft" format="dimension|reference"/>
+        <attr name="thumb_marginRight" format="dimension|reference"/>
+        <attr name="thumb_width" format="dimension|reference"/>
+        <attr name="thumb_height" format="dimension|reference"/>
+        <attr name="onColor" format="color|reference"/>
+        <attr name="offColor" format="color|reference"/>
+        <attr name="thumbColor" format="color|reference"/>
+        <attr name="thumbPressedColor" format="color|reference"/>
+        <attr name="animationVelocity" format="integer"/>
+        <!-- <attr name="radius" format="integer" /> -->
+        <attr name="measureFactor" format="float"/>
+        <attr name="insetLeft" format="dimension|reference"/>
+        <attr name="insetRight" format="dimension|reference"/>
+        <attr name="insetTop" format="dimension|reference"/>
+        <attr name="insetBottom" format="dimension|reference"/>
+        <!-- 画笔的style -->
+        <attr name="paint_style" format="integer"/>
+    </declare-styleable>
+    
+    <!--state view -->
+    <declare-styleable name="MultiStateView">
+        <attr name="msv_loadingView" format="reference"/>
+        <attr name="msv_emptyView" format="reference"/>
+        <attr name="msv_errorView" format="reference"/>
+        <attr name="msv_netView" format="reference"/>
+        <attr name="msv_viewState" format="enum">
+            <enum name="content" value="0"/>
+            <enum name="error" value="1"/>
+            <enum name="empty" value="2"/>
+            <enum name="loading" value="3"/>
+            <enum name="net_error" value="4"/>
+        </attr>
+        <attr name="msv_animateViewChanges" format="boolean"/>
+    </declare-styleable>
+    
+    
+    <!--pull to refresh -->
+    <declare-styleable name="PtrFrameLayout">
+        <!-- Optional. If you put header and content in xml, you can you these to specify them. -->
+        <attr name="ptr_header" format="reference" />
+        <attr name="ptr_content" format="reference" />
+        
+        <!-- the resistance when you are moving the frame -->
+        <attr name="ptr_resistance" format="float" />
+        
+        <!-- the ration of the height of the header to trigger refresh -->
+        <attr name="ptr_ratio_of_header_height_to_refresh" format="float" />
+        
+        <attr name="ptr_duration_to_close" format="integer" />
+        <attr name="ptr_duration_to_close_header" format="integer" />
+        
+        <!-- pull to refresh, otherwise release to refresh, default is release to refresh -->
+        <attr name="ptr_pull_to_fresh" format="boolean" />
+        
+        <!-- keep header when refreshing-->
+        <attr name="ptr_keep_header_when_refresh" format="boolean" />
+    </declare-styleable>
+    
+    <declare-styleable name="PtrClassicHeader">
+        <attr name="ptr_rotate_ani_time" format="integer" />
+    </declare-styleable>
+
+
+</resources>

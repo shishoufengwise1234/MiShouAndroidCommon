@@ -48,5 +48,6 @@ dependencies {
 
 //    compile rootProject.ext.de
 
-    compile project(':mishou_common')
+    compile project(':push_library')
+    compile project(':common')
 }

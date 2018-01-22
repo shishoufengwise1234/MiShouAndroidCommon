@@ -28,6 +28,12 @@ public class TbsFragment extends BaseSupportFragment {
     @BindView(R.id.btn_call_js)
     Button btnCallJs;
 
+//    public static final String VEDIO_TEST = "file:///android_asset/test_video.html";
+    public static final String VEDIO_TEST = "http://39.106.13.53:7772/#/buy";
+
+
+    private String test_token = "1234";
+
 
     @Override
     protected int getLayoutView() {
@@ -47,16 +53,35 @@ public class TbsFragment extends BaseSupportFragment {
             public void onClick(View view) {
 
 
+//                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+//                    wbTbs.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            wbTbs.loadUrl("javascript:testAlert()");
+//
+//                        }
+//                    });
+//                } else {
+//                    wbTbs.evaluateJavascript("javascript:testAlert()", new ValueCallback<String>() {
+//                        @Override
+//                        public void onReceiveValue(String s) {
+//
+//                            Logger.d("onReceiveValue > " + s);
+//                        }
+//                    });
+//                }
+
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
                     wbTbs.post(new Runnable() {
                         @Override
                         public void run() {
-                            wbTbs.loadUrl("javascript:testAlert()");
+//                            baseWebView.loadUrl("javascript:testAlert()");
+                            wbTbs.loadUrl("javascript:setToken("+test_token+")");
 
                         }
                     });
                 } else {
-                    wbTbs.evaluateJavascript("javascript:testAlert()", new ValueCallback<String>() {
+                    wbTbs.evaluateJavascript("javascript:setToken("+test_token+")", new ValueCallback<String>() {
                         @Override
                         public void onReceiveValue(String s) {
 
@@ -64,6 +89,7 @@ public class TbsFragment extends BaseSupportFragment {
                         }
                     });
                 }
+
             }
         });
     }
@@ -74,7 +100,8 @@ public class TbsFragment extends BaseSupportFragment {
         Test mTest = new Test();
         wbTbs.addJavascriptInterface(mTest, "mTest");
 
-        wbTbs.loadUrl("file:///android_asset/test_tbs.html");
+//        wbTbs.loadUrl("file:///android_asset/test_tbs.html");
+        wbTbs.loadUrl(VEDIO_TEST);
 
     }
 

@@ -39,9 +39,9 @@ public class HistoryPresenterImpl implements HistoryContract.Presenter {
     public void loadData(String key, String date) {
 
 
-//        get_Data(key,date);
+        get_Data(key,date);
 
-        post_Data(key,date);
+//        post_Data(key,date);
 
     }
 
@@ -54,9 +54,9 @@ public class HistoryPresenterImpl implements HistoryContract.Presenter {
     private void post_Data(String key, String date) {
 
 
-        OnlyHttp.get("http://v.juhe.cn/todayOnhistory/queryEvent.php?key=67e17f4a34171485eb0047ff1927cb00&date=11/18")
-//                .addParams("key",key)
-//                .addParams("date",date) //采用 class 代理方式解析数据
+        OnlyHttp.get(Constants.HISTORY_LIST)
+                .addParams("key",key)
+                .addParams("date",date) //采用 class 代理方式解析数据
                 .execute(new CallClazzProxy<HistoryData<List<HistoryBean>>,
                         List<HistoryBean>>(new TypeToken<List<HistoryBean>>(){}.getType()){})
                 .subscribe(new Consumer<List<HistoryBean>>() {

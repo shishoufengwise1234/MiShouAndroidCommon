@@ -1,0 +1,66 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'android-apt'
+
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+//    testCompile rootProject.ext.dependencies["testjuit"]
+//    testCompile rootProject.ext.dependencies["test-runner"]
+//    testCompile rootProject.ext.dependencies["espresso"]
+//    testCompile rootProject.ext.dependencies["rules"]
+//    testCompile rootProject.ext.dependencies["uiautomator"]
+
+
+    compile rootProject.ext.dependencies["support-v4"]
+    compile rootProject.ext.dependencies["support-v7"]
+    compile rootProject.ext.dependencies["annotaations"]
+    compile rootProject.ext.dependencies["recyclerview"]
+    compile rootProject.ext.dependencies["design"]
+    compile rootProject.ext.dependencies["retrofit"]
+    compile rootProject.ext.dependencies["converter_gson"]
+    compile rootProject.ext.dependencies["rxjava2"]
+    compile rootProject.ext.dependencies["rxandroid"]
+    compile rootProject.ext.dependencies["rxjava2-adapter"]
+    compile rootProject.ext.dependencies["rxlifecycle2"]
+    compile rootProject.ext.dependencies["rxlifecycle2-components"]
+    compile rootProject.ext.dependencies["butterknife"]
+    compile rootProject.ext.dependencies["butterknife_apt"]
+//    compile rootProject.ext.dependencies["matisse"]
+    compile rootProject.ext.dependencies["logger"]
+    compile rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    compile rootProject.ext.dependencies["glide_okhttp"]
+
+    compile rootProject.ext.dependencies["umeng-analytics"]
+
+
+}

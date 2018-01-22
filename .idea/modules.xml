@@ -4,7 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MiShouAndroidCommon.iml" filepath="$PROJECT_DIR$/MiShouAndroidCommon.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mishou_common/mishou_common.iml" filepath="$PROJECT_DIR$/mishou_common/mishou_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/push_library/push_library.iml" filepath="$PROJECT_DIR$/push_library/push_library.iml" />
       <module fileurl="file://$PROJECT_DIR$/widgetsLibrary/widgetsLibrary.iml" filepath="$PROJECT_DIR$/widgetsLibrary/widgetsLibrary.iml" />
     </modules>
   </component>

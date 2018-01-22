@@ -59,6 +59,8 @@ public class HistoryActivity extends BaseMvpAppcompatActivity<HistoryContract.Pr
     @Override
     public void onShowNetError() {
 
+
+
     }
 
     @Override
