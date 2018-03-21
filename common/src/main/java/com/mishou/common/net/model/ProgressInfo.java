@@ -3,6 +3,8 @@ package com.mishou.common.net.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.orhanobut.logger.Logger;
+
 /**
  * Created by shishoufeng on 2018/1/5.
  * email:shishoufeng1227@126.com
@@ -22,22 +24,11 @@ public class ProgressInfo implements Parcelable {
     //此 id (请求开始时的时间)就变得尤为重要,用来区分正在执行的进度信息,因为是以请求开始时的时间作为 id ,所以值越大,说明该请求越新
     private boolean finish; //进度是否完成
 
+    public ProgressInfo() {
 
-    public long getCurrentBytes() {
-        return currentBytes;
     }
-
-    public void setCurrentBytes(long currentBytes) {
-        this.currentBytes = currentBytes;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public ProgressInfo(long id) {
         this.id = id;
-
     }
 
     public void setCurrentbytes(long currentbytes) {
@@ -47,7 +38,6 @@ public class ProgressInfo implements Parcelable {
     public void setContentLength(long contentLength) {
         this.contentLength = contentLength;
     }
-
 
     public void setFinish(boolean finish) {
         this.finish = finish;
@@ -61,6 +51,9 @@ public class ProgressInfo implements Parcelable {
         return contentLength;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getId() {
         return id;
@@ -74,8 +67,13 @@ public class ProgressInfo implements Parcelable {
      * 获取百分比,该计算舍去了小数点,如果你想得到更精确的值,请自行计算
      */
     public int getPercent() {
-        if (getCurrentbytes() <= 0 || getContentLength() <= 0) return 0;
-        return (int) ((100 * getCurrentbytes()) / getContentLength());
+        if (getCurrentbytes() <= 0 || getContentLength() <= 0){
+            return 0;
+        }
+        int progress = (int) ((getCurrentbytes() * 100) / getContentLength());
+        Logger.d("getPercent: progress = "+progress);
+
+        return progress;
     }
 
 

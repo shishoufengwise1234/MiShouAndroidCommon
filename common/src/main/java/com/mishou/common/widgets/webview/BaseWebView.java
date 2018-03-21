@@ -103,7 +103,7 @@ public class BaseWebView extends WebView {
         /***
          * 设置WebView 缓存策略
          */
-        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         /***
          * 允许访问文件
          */

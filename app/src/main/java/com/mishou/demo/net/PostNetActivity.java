@@ -24,7 +24,7 @@ public class PostNetActivity extends BaseMvpAppcompatActivity{
     }
 
     @Override
-    public void onShowLoading() {
+    public void onShowLoading(int state) {
 
     }
 
@@ -34,9 +34,10 @@ public class PostNetActivity extends BaseMvpAppcompatActivity{
     }
 
     @Override
-    public void onShowNetError() {
+    public void onShowNetError(int state) {
 
     }
+
 
     @Override
     protected int getLayoutView() {

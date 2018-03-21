@@ -20,7 +20,7 @@ public class BaseMvpFragmentTest extends BaseMvpSupportFragment {
     }
 
     @Override
-    public void onShowLoading() {
+    public void onShowLoading(int state) {
 
     }
 
@@ -30,9 +30,10 @@ public class BaseMvpFragmentTest extends BaseMvpSupportFragment {
     }
 
     @Override
-    public void onShowNetError() {
+    public void onShowNetError(int state) {
 
     }
+
 
     @Override
     protected int getLayoutView() {

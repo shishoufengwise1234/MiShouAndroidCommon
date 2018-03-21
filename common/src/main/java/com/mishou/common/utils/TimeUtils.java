@@ -283,6 +283,40 @@ public class TimeUtils {
     }
 
 
+    /**
+     * 根据标准时间格式 解析出年和月
+     * @param date Date 时间
+     * @return yyyy-MM
+     */
+    public static String parseYearAndMonth(Date date){
+        if (date == null)
+            return "";
+
+        return parseYearAndMonth(date2String(date));
+    }
+
+    /**
+     *
+     * 根据标准时间格式 解析出年和月
+     * @param time 时间 SimpleDateFormat("yyyy-MM-dd HH:mm:ss") 格式
+     * @return yyyy-MM
+     */
+    public static String parseYearAndMonth(String time){
+        try {
+            if (StringUtils.isEmpty(time)) {
+                return "";
+            }
+            if (time.length() > 7) {
+                return time.substring(0, 7);
+            }
+            return "";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+
 
 
 }

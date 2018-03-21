@@ -1,5 +1,7 @@
 package com.mishou.common.net.callback.body;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemClock;
 
 import com.mishou.common.net.callback.OnDownloadProgressListener;
@@ -36,12 +38,14 @@ public class DownloadProgressResponseBody extends ResponseBody {
 
     private long mRefreshTime = OnlyConstants.DEFAULT_REFRESH_TIME;
 
+    private static final Handler mHandler = new Handler(Looper.getMainLooper());
+
     public DownloadProgressResponseBody(Response response, OnDownloadProgressListener listener) {
         this.targetResponse = response;
         this.onDownloadProgressListener = listener;//OnDownloadProgressListener listener this is 回调
 
         //获取当前时间戳值 作为上传/下载 ID
-        this.mProgressInfo = new ProgressInfo(System.currentTimeMillis());
+        this.mProgressInfo = new ProgressInfo();
     }
 
     @Override
@@ -110,14 +114,22 @@ public class DownloadProgressResponseBody extends ResponseBody {
                     final long finalBytesRead = bytesRead;
                     final long finalTotalBytesRead = totalBytesRead;
 
-                    if (onDownloadProgressListener != null) {
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        mProgressInfo.setCurrentbytes(finalTotalBytesRead);
-                        mProgressInfo.setFinish(finalBytesRead == -1 && finalTotalBytesRead == mProgressInfo.getContentLength());
+                            if (onDownloadProgressListener != null) {
 
-                        //回调进度
-                        onDownloadProgressListener.onProgress(mProgressInfo);
-                    }
+                                mProgressInfo.setCurrentbytes(finalTotalBytesRead);
+                                mProgressInfo.setFinish(finalBytesRead == -1 && finalTotalBytesRead == mProgressInfo.getContentLength());
+
+                                //回调进度
+                                onDownloadProgressListener.onProgress(mProgressInfo);
+                            }
+
+                        }
+                    });
+
                     lastRefreshTime = curTime;
                     tempSize = 0;
                 }

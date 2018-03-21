@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'android-apt'
 
+apply plugin: 'maven'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -10,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
+        versionCode 3
+        versionName "1.0.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -33,12 +32,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-//    testCompile rootProject.ext.dependencies["testjuit"]
-//    testCompile rootProject.ext.dependencies["test-runner"]
-//    testCompile rootProject.ext.dependencies["espresso"]
-//    testCompile rootProject.ext.dependencies["rules"]
-//    testCompile rootProject.ext.dependencies["uiautomator"]
-
 
     compile rootProject.ext.dependencies["support-v4"]
     compile rootProject.ext.dependencies["support-v7"]
@@ -53,14 +46,66 @@ dependencies {
     compile rootProject.ext.dependencies["rxlifecycle2"]
     compile rootProject.ext.dependencies["rxlifecycle2-components"]
     compile rootProject.ext.dependencies["butterknife"]
-    compile rootProject.ext.dependencies["butterknife_apt"]
-//    compile rootProject.ext.dependencies["matisse"]
     compile rootProject.ext.dependencies["logger"]
     compile rootProject.ext.dependencies["glide"]
-    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     compile rootProject.ext.dependencies["glide_okhttp"]
-
-    compile rootProject.ext.dependencies["umeng-analytics"]
 
 
 }
+
+//定义上传行为
+//uploadArchives {
+//
+//    repositories {
+//        //仓库基于maven
+//        repositories.mavenDeployer {
+//
+////        snapshotRepository(url: 'http://10.129.83.244:8082/nexus/content/repositories/mobile-snapshot/') {
+////            authentication(userName: 'admin', password: 'mishou123')
+////        }
+//            //配置上传的url
+//            repository(url: "http://39.106.17.189:8081/nexus/content/repositories/snapshots/") {
+//                authentication(userName: "admin", password: "mishou123")
+//            }
+////            repository(url: "http://39.106.17.189:8081/nexus/content/repositories/mobile/") {
+////                authentication(userName: "admin", password: "mishou123")
+////            }
+//            pom.project {
+//                name 'common'
+//                version '1.0.0'
+//                artifactId 'common'
+//                groupId 'com.mishou'
+//                packaging 'aar'
+//                description 'numberMorphView for Android'
+//            }
+//        }
+//    }
+//}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(
+                    url: "${nexusUrl}/content/repositories/releases") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            snapshotRepository(
+                    url: "${nexusUrl}/content/repositories/snapshots") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            pom.project {
+                name 'common'
+                version '1.0.2'
+                artifactId 'common'
+                groupId 'com.mishou.android'
+                packaging 'aar'
+                description 'numberMorphView for Android'
+            }
+        }
+    }
+}
+artifacts {
+    archives file('common.aar')
+}
+
+

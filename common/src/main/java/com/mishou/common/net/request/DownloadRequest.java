@@ -56,12 +56,44 @@ public class DownloadRequest extends BaseRequest<DownloadRequest> {
      */
     public Disposable startDownload(@NonNull final MainDownloadProgressCallBack callBack) {
 
+//        addInterceptor(new Interceptor() {
+//            @Override
+//            public Response intercept(Chain chain) throws IOException {
+//                Request request = chain.request();
+//
+//                Response response = chain.proceed(request);
+//
+//                return response.newBuilder().body(new DownloadProgressResponseBody(response,callBack)).build();
+//            }
+//        });
+
+//        return create().createObservable()
+//                .retryWhen(new RetryFunction(retryCount, retryDelay, retryIncreaseDelay))
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(Schedulers.io())
+//                .subscribeWith(new DownloadSubscriber(baseContext, savePath, saveName, callBack));
         return create().createObservable()
                 .retryWhen(new RetryFunction(retryCount, retryDelay, retryIncreaseDelay))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribeWith(new DownloadSubscriber(baseContext, savePath, saveName, callBack));
+
+//        return (Disposable) create().createObservable().compose(new ObservableTransformer<ResponseBody, ResponseBody>() {
+//            @Override
+//            public ObservableSource<ResponseBody> apply(@io.reactivex.annotations.NonNull Observable<ResponseBody> upstream) {
+//                if(isSyncRequest){
+//                    return upstream;//.observeOn(AndroidSchedulers.mainThread());
+//                }else {
+//                    return upstream.subscribeOn(Schedulers.io())
+//                            .unsubscribeOn(Schedulers.io())
+//                            .observeOn(Schedulers.io());
+//                }
+//            }
+//        }).compose(new ResponseErrorTransformer())
+//                .retryWhen(new RetryFunction(retryCount, retryDelay, retryIncreaseDelay))
+//                .subscribeWith(new DownloadSubscriber(baseContext,savePath,saveName,callBack));
 
     }
 

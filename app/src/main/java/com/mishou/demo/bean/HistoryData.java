@@ -39,11 +39,6 @@ public class HistoryData<T> extends ApiResult<T>{
 
 
     @Override
-    public String getMsg() {
-        return reason;
-    }
-
-    @Override
     public boolean isOk() {
         return error_code == 0;
     }

@@ -110,7 +110,7 @@ public class ApiResultFunction<T> implements Function<ResponseBody, ApiResult<T>
                         if (result != null) {
                             apiResult = result;
                         } else {
-                            apiResult.setMessage("json is null");
+                            apiResult.setMessage("数据出错");
                         }
                     }
                 } catch (Exception e) {
@@ -121,7 +121,7 @@ public class ApiResultFunction<T> implements Function<ResponseBody, ApiResult<T>
                     responseBody.close();
                 }
             } else {
-                apiResult.setMessage("ApiResult.class.isAssignableFrom(cls) err!!");
+                apiResult.setMessage("数据出错");
             }
         } else {    //默认ApiResult 格式数据
             try {
@@ -136,7 +136,7 @@ public class ApiResultFunction<T> implements Function<ResponseBody, ApiResult<T>
                         apiResult = result;
                         apiResult.setData((T) json);
                     } else {
-                        apiResult.setMessage("json is null");
+                        apiResult.setMessage("数据出错");
                     }
                 } else {
 
@@ -147,10 +147,10 @@ public class ApiResultFunction<T> implements Function<ResponseBody, ApiResult<T>
                             T data = mGson.fromJson(apiResult.getData().toString(), clazz);
                             apiResult.setData(data);
                         } else {
-                            apiResult.setMessage("ApiResult's data is null");
+                            apiResult.setMessage("数据出错");
                         }
                     } else {
-                        apiResult.setMessage("json is null");
+                        apiResult.setMessage("数据出错");
                     }
                 }
             } catch (JSONException e) {

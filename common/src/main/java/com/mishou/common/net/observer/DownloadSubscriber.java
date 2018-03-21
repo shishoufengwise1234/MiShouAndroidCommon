@@ -2,6 +2,8 @@ package com.mishou.common.net.observer;
 
 import android.Manifest;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.RequiresPermission;
 import android.text.TextUtils;
 
@@ -17,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import okhttp3.MediaType;
-import okhttp3.ResponseBody;
 
 /**
  * Created by ${shishoufeng} on 17/11/21.
@@ -26,7 +27,7 @@ import okhttp3.ResponseBody;
  * 下载订阅者
  */
 
-public class DownloadSubscriber extends BaseSubscriber<ResponseBody> {
+public class DownloadSubscriber<ResponseBody extends okhttp3.ResponseBody> extends BaseSubscriber<ResponseBody> {
 
     private static final String APK_CONTENT_TYPE = "application/vnd.android.package-archive";
     private static final String PNG_CONTENT_TYPE = "image/png";
@@ -36,10 +37,11 @@ public class DownloadSubscriber extends BaseSubscriber<ResponseBody> {
     private String saveName;
     private MainDownloadProgressCallBack mCallBack;
     private Context context;
+    private long lastRefreshTime = 0L;  //最后一次刷新的时间
 
     private long mRefreshTime = OnlyConstants.DEFAULT_REFRESH_TIME;
 
-    private ProgressInfo mProgressInfo;
+    private static final Handler mHandler = new Handler(Looper.getMainLooper());
 
 
     public DownloadSubscriber(Context context, String savePath, String saveName, MainDownloadProgressCallBack callBack) {
@@ -49,7 +51,7 @@ public class DownloadSubscriber extends BaseSubscriber<ResponseBody> {
         this.savePath = savePath;
         this.mCallBack = callBack;
         //获取当前时间戳值 作为上传/下载 ID
-        this.mProgressInfo = new ProgressInfo(System.currentTimeMillis());
+        this.lastRefreshTime = System.currentTimeMillis();
     }
 
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
@@ -60,6 +62,7 @@ public class DownloadSubscriber extends BaseSubscriber<ResponseBody> {
 
         if (mCallBack != null)
             mCallBack.onStart();
+
     }
 
     @Override
@@ -80,9 +83,6 @@ public class DownloadSubscriber extends BaseSubscriber<ResponseBody> {
      * @param body ResponseBody
      */
     private void saveFile(ResponseBody body) throws IOException {
-
-
-        long lastRefreshTime = 0L;  //最后一次刷新的时间
 
         //文件后缀
         String fileSuffix = "";
@@ -130,10 +130,6 @@ public class DownloadSubscriber extends BaseSubscriber<ResponseBody> {
         final long fileCountSize = body.contentLength();
         OnlyLog.d("file contentLength ->" + fileCountSize);
 
-        if (mProgressInfo.getContentLength() == 0) { //避免重复调用 contentLength()
-            mProgressInfo.setContentLength(fileCountSize);
-        }
-
         //文件流
         InputStream inputStream = body.byteStream();
         //输出文件流
@@ -141,14 +137,14 @@ public class DownloadSubscriber extends BaseSubscriber<ResponseBody> {
         //读取文件大小
         byte[] fileReader = new byte[1024 * 4];
 
-        int bytesRead;
-        long totalBytesRead = 0L;
+        int bytesRead = 0;
+        long totalBytesRead = 0;
 
+        final MainDownloadProgressCallBack listener = mCallBack;
         while (true) {
 
             bytesRead = inputStream.read(fileReader);
             if (bytesRead == -1) {  //读写完成
-
                 break;
             }
 
@@ -161,20 +157,30 @@ public class DownloadSubscriber extends BaseSubscriber<ResponseBody> {
             //下载进度
             float progress = totalBytesRead * 1.0f / fileCountSize;
 
+            OnlyLog.i("file download: " + totalBytesRead + " of " + fileCountSize);
+
             //当前刷新时间
             long curTime = System.currentTimeMillis();
 
-            if (curTime - lastRefreshTime >= mRefreshTime || progress == 1.0f || totalBytesRead == mProgressInfo.getContentLength()) {
+            if (curTime - lastRefreshTime >= mRefreshTime || progress == 1.0f) {
+
                 final long finalTotalBytesRead = totalBytesRead;
 
-                if (mCallBack != null) {
+                if (listener != null) {
 
-                    mProgressInfo.setCurrentbytes(finalTotalBytesRead);
-                    mProgressInfo.setFinish(finalTotalBytesRead == mProgressInfo.getContentLength());
+                    ProgressInfo progressInfo = new ProgressInfo();
+                    progressInfo.setContentLength(fileCountSize);
+                    progressInfo.setCurrentbytes(finalTotalBytesRead);
+                    progressInfo.setFinish(finalTotalBytesRead == fileCountSize);
 
-                    //回调进度
-                    mCallBack.onProgress(mProgressInfo);
+//                    if (listener instanceof MainDownloadProgressCallBack) {
+                        //回调进度
+                        listener.onProgress(progressInfo);
+//                    }
+
+                    OnlyLog.i("callback mHandler.post(new Runnable()");
                 }
+
                 lastRefreshTime = curTime;
             }
         }
@@ -183,28 +189,29 @@ public class DownloadSubscriber extends BaseSubscriber<ResponseBody> {
         fos.flush();
 
         //关闭文件流
-        inputStream.close();
         fos.close();
+        inputStream.close();
 
         //回调完成
-        if (mCallBack != null) {
+        if (listener != null) {
 
             final String finalPath = savePath;
 
-            mCallBack.onDownloadCompleted(finalPath);
-        }
+            listener.onDownloadCompleted(finalPath);
 
+            OnlyLog.i("callback listener.onDownloadCompleted(finalPath)");
+        }
     }
 
+
     @Override
-    public void onComplete() {
+    public final void onComplete() {
         super.onComplete();
         OnlyLog.d("DownloadSubscriber -> onComplete()");
-
     }
 
     @Override
-    protected void onErrorMessage(ApiException exception) {
+    protected void onErrorMessage(final ApiException exception) {
         OnlyLog.d("DownloadSubscriber -> onErrorMessage()");
 
         callbackError(exception);
@@ -216,14 +223,16 @@ public class DownloadSubscriber extends BaseSubscriber<ResponseBody> {
      * @param exception 异常
      */
 
-    private void callbackError(Exception exception) {
+    private void callbackError(final Exception exception) {
 
         OnlyLog.d("DownloadSubscriber --callbackError ---");
+
 
         if (mCallBack != null) {
 
             mCallBack.onError(new ApiException(exception, OnlyConstants.DOWNLOAD_FILE_ERROR));
         }
+
     }
 
 

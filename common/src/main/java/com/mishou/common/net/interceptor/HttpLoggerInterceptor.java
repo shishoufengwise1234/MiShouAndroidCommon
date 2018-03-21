@@ -32,7 +32,7 @@ import okio.BufferedSource;
  * <p>
  * 自定义网络拦截器
  */
-
+// TODO: 2018/2/8  捕获io异常 抛出 其他异常 不抛出
 public class HttpLoggerInterceptor implements Interceptor {
 
     private static final String TAG = "OkHttp";

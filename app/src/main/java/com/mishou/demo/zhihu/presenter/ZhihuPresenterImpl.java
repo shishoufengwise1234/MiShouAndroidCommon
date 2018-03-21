@@ -35,7 +35,6 @@ public class ZhihuPresenterImpl implements ZhihuContract.Presenter {
     @Override
     public void loadZhihuData() {
 
-        view.onShowLoading();
 
         OnlyHttp.custom(Constants.ZHIHU_LAST)
                 .addConverterFactory(GsonConverterFactory.create())

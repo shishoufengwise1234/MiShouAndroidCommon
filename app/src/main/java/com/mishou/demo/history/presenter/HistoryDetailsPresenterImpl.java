@@ -336,7 +336,7 @@ public class HistoryDetailsPresenterImpl implements HistoryDetailsContract.Prese
 
     private void onErrorCallback(Throwable e) {
         Logger.d("onerror" + e);
-        viewHis.onShowNetError();
+//        viewHis.onShowNetError();
     }
 
     private void onReuslt(List<HistoryDetailsBean> historyDetailsBeans) {
@@ -351,7 +351,7 @@ public class HistoryDetailsPresenterImpl implements HistoryDetailsContract.Prese
         Logger.d("start" + view);
 
 
-        viewHis.onShowLoading();
+//        viewHis.onShowLoading();
     }
 
     @Override

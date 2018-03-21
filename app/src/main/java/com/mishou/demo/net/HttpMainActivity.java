@@ -39,7 +39,7 @@ public class HttpMainActivity extends BaseMvpActivity {
     }
 
     @Override
-    public void onShowLoading() {
+    public void onShowLoading(int state) {
 
     }
 
@@ -49,9 +49,10 @@ public class HttpMainActivity extends BaseMvpActivity {
     }
 
     @Override
-    public void onShowNetError() {
+    public void onShowNetError(int state) {
 
     }
+
 
     @Override
     protected int getLayoutView() {

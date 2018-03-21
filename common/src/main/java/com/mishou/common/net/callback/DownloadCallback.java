@@ -9,6 +9,9 @@ package com.mishou.common.net.callback;
 
 public abstract class DownloadCallback<T> extends CallBack<T> {
 
+    public  DownloadCallback(){
+
+    }
 
     @Override
     public void onCompleted() {

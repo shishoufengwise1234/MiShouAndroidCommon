@@ -42,6 +42,7 @@ public abstract class MainDownloadProgressCallBack implements OnDownloadProgress
             switch (msg.what) {
 
                 case DOWNLOAD_START:    //开始下载
+                    OnlyLog.d("DOWNLOAD_START  ");
                     MainDownloadProgressCallBack callBackStart = mainUploadProgressCallBackWeakReference.get();
                     if (callBackStart != null) {
                         callBackStart.onUIStart();
@@ -49,6 +50,7 @@ public abstract class MainDownloadProgressCallBack implements OnDownloadProgress
                     break;
 
                 case DOWNLOAD_ERROR:    //下载异常
+                    OnlyLog.d("DOWNLOAD_ERROR  ");
                     MainDownloadProgressCallBack callBackError = mainUploadProgressCallBackWeakReference.get();
                     ApiException exception = (ApiException) msg.obj;
                     if (callBackError != null) {
@@ -58,6 +60,7 @@ public abstract class MainDownloadProgressCallBack implements OnDownloadProgress
                     break;
 
                 case DOWNLOAD_PROGRESS:     //下载回调
+                    OnlyLog.d("DOWNLOAD_PROGRESS  ");
                     MainDownloadProgressCallBack callBack = mainUploadProgressCallBackWeakReference.get();
                     if (callBack != null) {
                         //获得进度实体类
@@ -71,6 +74,7 @@ public abstract class MainDownloadProgressCallBack implements OnDownloadProgress
                     }
                     break;
                 case DOWNLOAD_COMPLETED:    //下载完成
+                    OnlyLog.d("DOWNLOAD_COMPLETED  ");
                     MainDownloadProgressCallBack callBackCompleted = mainUploadProgressCallBackWeakReference.get();
                     String filePath = (String) msg.obj;
                     if (callBackCompleted != null) {
@@ -89,7 +93,9 @@ public abstract class MainDownloadProgressCallBack implements OnDownloadProgress
      */
     @Override
     public void onStart() {
-        Message message = mHandler.obtainMessage();
+        OnlyLog.d("onStart()  ");
+
+        Message message = new Message();
         message.what = DOWNLOAD_START;
 
         mHandler.sendMessage(message);
@@ -102,7 +108,9 @@ public abstract class MainDownloadProgressCallBack implements OnDownloadProgress
      */
     @Override
     public void onError(ApiException e) {
-        Message message = mHandler.obtainMessage();
+        OnlyLog.d("onError()  ");
+
+        Message message = new Message();
         message.what = DOWNLOAD_ERROR;
         message.obj = e;
 
@@ -116,8 +124,9 @@ public abstract class MainDownloadProgressCallBack implements OnDownloadProgress
      */
     @Override
     public void onDownloadCompleted(String filePath) {
+        OnlyLog.d("onDownloadCompleted()  ");
 
-        Message message = mHandler.obtainMessage();
+        Message message = new Message();
         message.what = DOWNLOAD_COMPLETED;
         message.obj = filePath;
 
@@ -131,7 +140,9 @@ public abstract class MainDownloadProgressCallBack implements OnDownloadProgress
      */
     @Override
     public void onProgress(ProgressInfo info) {
-        Message message = mHandler.obtainMessage();
+        OnlyLog.d("onProgress()  ");
+
+        Message message = new Message();
         message.what = DOWNLOAD_PROGRESS;
         message.obj = info;
 

@@ -11,7 +11,6 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/push_library" />
-            <option value="$PROJECT_DIR$/widgetsLibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

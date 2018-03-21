@@ -3,7 +3,6 @@ package com.mishou.demo.net;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
@@ -11,12 +10,6 @@ import android.widget.Button;
 import com.mishou.common.base.mvp.BaseMvpActivity;
 import com.mishou.common.base.mvp.IBasePresenter;
 import com.mishou.common.demo.R;
-import com.mishou.common.net.OnlyHttp;
-import com.mishou.common.net.callback.DownloadCallback;
-import com.mishou.common.net.exception.ApiException;
-import com.mishou.common.utils.ToastUtils;
-import com.mishou.demo.Constants;
-import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 
@@ -39,9 +32,10 @@ public class DownloadActivity extends BaseMvpActivity {
     }
 
     @Override
-    public void onShowLoading() {
+    public void onShowLoading(int state) {
 
     }
+
 
     @Override
     public void onHideLoading() {
@@ -49,9 +43,10 @@ public class DownloadActivity extends BaseMvpActivity {
     }
 
     @Override
-    public void onShowNetError() {
+    public void onShowNetError(int state) {
 
     }
+
 
     @Override
     protected int getLayoutView() {
@@ -83,49 +78,49 @@ public class DownloadActivity extends BaseMvpActivity {
     }
 
     private void startDownload() {
-
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/ms_test/";
-        String name = "wuba.apk";
-
-        OnlyHttp.download(Constants.DOWNLOAD_TEST)
-                .savePath(path)
-                .saveName(name)
-                .execute(new DownloadCallback<String>() {
-                    @Override
-                    public void onProgress(long bytesRead, long contentLength, boolean done) {
-
-//                        Logger.d("progress = "+bytesRead+"  total = "+contentLength);
-                        int progress = (int) (bytesRead * 100 / contentLength);
-                        dialog.setProgress(progress);
-                        if (done) {
-                            dialog.setMessage("下载完成");
-                        }
-                    }
-
-                    @Override
-                    public void onDownloadCompleted(String filePath) {
-
-                        Logger.d("onsuccess"+filePath);
-
-                        ToastUtils.showMessage(mContext,filePath);
-
-                        dialog.dismiss();
-                    }
-
-                    @Override
-                    public void onStart() {
-
-                        dialog.show();
-                    }
-
-                    @Override
-                    public void onError(ApiException e) {
-
-                        dialog.dismiss();
-                    }
-
-
-                });
+//
+//        String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/ms_test/";
+//        String name = "wuba.apk";
+//
+//        OnlyHttp.download(Constants.DOWNLOAD_TEST)
+//                .savePath(path)
+//                .saveName(name)
+//                .execute(new DownloadCallback<String>() {
+//                    @Override
+//                    public void onProgress(long bytesRead, long contentLength, boolean done) {
+//
+////                        Logger.d("progress = "+bytesRead+"  total = "+contentLength);
+//                        int progress = (int) (bytesRead * 100 / contentLength);
+//                        dialog.setProgress(progress);
+//                        if (done) {
+//                            dialog.setMessage("下载完成");
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onDownloadCompleted(String filePath) {
+//
+//                        Logger.d("onsuccess"+filePath);
+//
+//                        ToastUtils.showMessage(mContext,filePath);
+//
+//                        dialog.dismiss();
+//                    }
+//
+//                    @Override
+//                    public void onStart() {
+//
+//                        dialog.show();
+//                    }
+//
+//                    @Override
+//                    public void onError(ApiException e) {
+//
+//                        dialog.dismiss();
+//                    }
+//
+//
+//                });
     }
 
     @Override

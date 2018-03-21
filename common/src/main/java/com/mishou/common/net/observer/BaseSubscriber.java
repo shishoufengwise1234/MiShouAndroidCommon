@@ -63,7 +63,7 @@ public abstract class BaseSubscriber<T> extends DisposableObserver<T> {
     }
 
     @Override
-    public void onError(Throwable e) {
+    public final void onError(Throwable e) {
 
         OnlyLog.d("BaseSubscriber ----- onError() ----- ");
         //统一处理 异常

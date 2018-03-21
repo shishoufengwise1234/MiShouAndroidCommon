@@ -27,11 +27,16 @@ allprojects {
         google()
         jcenter()
 
+        mavenLocal()
+
         maven { url "https://jitpack.io" }
         //huaWei
         maven { url 'http://developer.huawei.com/repo/' }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 
+        maven {
+            url "http://39.106.17.189:8081/nexus/content/repositories/releases"
+        }
     }
 }
 

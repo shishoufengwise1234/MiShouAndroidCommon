@@ -47,7 +47,7 @@ public class HistoryActivity extends BaseMvpAppcompatActivity<HistoryContract.Pr
     }
 
     @Override
-    public void onShowLoading() {
+    public void onShowLoading(int state) {
 
     }
 
@@ -57,11 +57,10 @@ public class HistoryActivity extends BaseMvpAppcompatActivity<HistoryContract.Pr
     }
 
     @Override
-    public void onShowNetError() {
-
-
+    public void onShowNetError(int state) {
 
     }
+
 
     @Override
     public void showHistoryList(List<HistoryBean> historyBeans) {

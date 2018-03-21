@@ -37,22 +37,37 @@ public class HistoryDetailsActivity extends BaseMvpAppcompatActivity<HistoryDeta
     }
 
     @Override
-    public void onShowLoading() {
+    public void onShowLoading(int state) {
 
-        stateView.setViewState(MultiStateView.VIEW_STATE_LOADING);
     }
 
     @Override
     public void onHideLoading() {
 
-        stateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
     }
 
     @Override
-    public void onShowNetError() {
+    public void onShowNetError(int state) {
 
-        stateView.setViewState(MultiStateView.VIEW_STATE_ERROR);
     }
+
+//    @Override
+//    public void onShowLoading() {
+//
+//        stateView.setViewState(MultiStateView.VIEW_STATE_LOADING);
+//    }
+//
+//    @Override
+//    public void onHideLoading() {
+//
+//        stateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
+//    }
+//
+//    @Override
+//    public void onShowNetError() {
+//
+//        stateView.setViewState(MultiStateView.VIEW_STATE_ERROR);
+//    }
 
     @Override
     public void showDetailsData(HistoryDetailsBean detailsBean) {

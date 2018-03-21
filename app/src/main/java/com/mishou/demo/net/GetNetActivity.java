@@ -48,9 +48,10 @@ public class GetNetActivity extends BaseMvpAppcompatActivity {
     }
 
     @Override
-    public void onShowLoading() {
+    public void onShowLoading(int state) {
 
     }
+
 
     @Override
     public void onHideLoading() {
@@ -58,7 +59,7 @@ public class GetNetActivity extends BaseMvpAppcompatActivity {
     }
 
     @Override
-    public void onShowNetError() {
+    public void onShowNetError(int state) {
 
     }
 

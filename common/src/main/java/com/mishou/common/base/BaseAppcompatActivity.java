@@ -12,11 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 
-import com.mishou.common.BuildConfig;
 import com.mishou.common.manager.ActivityManager;
 import com.mishou.common.utils.LogUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -158,9 +156,6 @@ public abstract class BaseAppcompatActivity extends RxAppCompatActivity {
         super.onResume();
         LogUtils.d(TAG, "onResume: "+className);
 
-        if (!BuildConfig.DEBUG) {
-            MobclickAgent.onResume(mContext);
-        }
 
     }
 
@@ -170,9 +165,6 @@ public abstract class BaseAppcompatActivity extends RxAppCompatActivity {
 
         LogUtils.d(TAG, "onPause: "+className);
 
-        if (!BuildConfig.DEBUG) {
-            MobclickAgent.onPause(mContext);
-        }
     }
 
     @Override

@@ -48,6 +48,25 @@ dependencies {
 
 //    compile rootProject.ext.de
 
+    compile 'com.mishou.android:common:1.0.2@aar'
+
+    compile rootProject.ext.dependencies["support-v4"]
+    compile rootProject.ext.dependencies["support-v7"]
+    compile rootProject.ext.dependencies["annotaations"]
+    compile rootProject.ext.dependencies["recyclerview"]
+    compile rootProject.ext.dependencies["design"]
+    compile rootProject.ext.dependencies["retrofit"]
+    compile rootProject.ext.dependencies["converter_gson"]
+    compile rootProject.ext.dependencies["rxjava2"]
+    compile rootProject.ext.dependencies["rxandroid"]
+    compile rootProject.ext.dependencies["rxjava2-adapter"]
+    compile rootProject.ext.dependencies["rxlifecycle2"]
+    compile rootProject.ext.dependencies["rxlifecycle2-components"]
+    compile rootProject.ext.dependencies["butterknife"]
+    compile rootProject.ext.dependencies["logger"]
+    compile rootProject.ext.dependencies["glide"]
+    compile rootProject.ext.dependencies["glide_okhttp"]
+
     compile project(':push_library')
-    compile project(':common')
+//    compile project(':common')
 }

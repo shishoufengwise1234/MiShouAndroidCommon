@@ -27,7 +27,7 @@ public class OnlyConstants {
     /**
      * 默认刷新间隔时间 避免频繁调用
      */
-    public static final int DEFAULT_REFRESH_TIME = 150;
+    public static final int DEFAULT_REFRESH_TIME = 100;
 
 
     /**

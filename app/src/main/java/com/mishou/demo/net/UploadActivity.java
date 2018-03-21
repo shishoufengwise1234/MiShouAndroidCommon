@@ -29,7 +29,7 @@ public class UploadActivity extends BaseMvpFragmentActivity {
     }
 
     @Override
-    public void onShowLoading() {
+    public void onShowLoading(int state) {
 
     }
 
@@ -39,9 +39,10 @@ public class UploadActivity extends BaseMvpFragmentActivity {
     }
 
     @Override
-    public void onShowNetError() {
+    public void onShowNetError(int state) {
 
     }
+
 
     @Override
     protected int getLayoutView() {
