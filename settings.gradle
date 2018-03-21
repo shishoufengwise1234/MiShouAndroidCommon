@@ -1,1 +1,1 @@
-include ':app', ':push_library', ':common'
+include ':app', ':common', ':widgetsLibrary', ':push_library'

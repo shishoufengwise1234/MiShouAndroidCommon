@@ -178,7 +178,7 @@ public class PushManager {
 
         Logger.d("set alias = " + alias);
 
-        UmengManager.getInstance(context).addAlias(alias, UmengManager.ALIAS_QIFUYUN);
+        UmengManager.getInstance(context).addAlias(alias, UmengManager.ALIAS_DEFAULT);
 
 
 //        int target = RomUtil.rom();
@@ -251,7 +251,7 @@ public class PushManager {
         }
 //        String alias = getAlias();
 
-        UmengManager.getInstance(context).removeAlias(alias, UmengManager.ALIAS_QIFUYUN);
+        UmengManager.getInstance(context).removeAlias(alias, UmengManager.ALIAS_DEFAULT);
 
 //        @Target int target = RomUtil.rom();
 //

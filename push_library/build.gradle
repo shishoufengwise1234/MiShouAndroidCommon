@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'maven'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -8,6 +9,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
     }
     buildTypes {
 
@@ -38,6 +41,35 @@ dependencies {
     testCompile rootProject.ext.dependencies["testjuit"]
     compile rootProject.ext.dependencies["support-v4"]
 
-    compile files('libs/com.umeng.message_3.1.1.jar')
+    compile files('libs/alicloud-android-sdk-httpdns-1.0.7.jar')
+    compile files('libs/com.umeng.message_3.1.5a.jar')
+    compile files('libs/utdid4all-1.1.5.3_proguard.jar')
+
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(
+                    url: "${nexusUrl}/content/repositories/releases") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            snapshotRepository(
+                    url: "${nexusUrl}/content/repositories/snapshots") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            pom.project {
+                name 'push'
+                version '1.0.0'
+                artifactId 'push'
+                groupId 'com.mishou.android'
+                packaging 'aar'
+                description 'numberMorphView for Android'
+            }
+        }
+    }
+}
+artifacts {
+    archives file('push_library.aar')
 }
 

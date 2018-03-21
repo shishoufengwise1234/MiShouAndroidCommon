@@ -1,0 +1,73 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile rootProject.ext.dependencies["testjuit"]
+
+    compile rootProject.ext.dependencies["support-v4"]
+    compile rootProject.ext.dependencies["support-v7"]
+
+    compile 'com.mishou.android:common:1.0.2@aar'
+
+    compile rootProject.ext.dependencies["glide"]
+    compile rootProject.ext.dependencies["glide_okhttp"]
+    compile rootProject.ext.dependencies["okhttp"]
+
+    compile rootProject.ext.dependencies["exifinterface"]
+
+}
+
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(
+//                    url: "${nexusUrl}/content/repositories/releases") {
+//                authentication(userName: nexusUsername, password: nexusPassword)
+//            }
+//            snapshotRepository(
+//                    url: "${nexusUrl}/content/repositories/snapshots") {
+//                authentication(userName: nexusUsername, password: nexusPassword)
+//            }
+//            pom.project {
+//                name 'widgets'
+//                version '1.0.0'
+//                artifactId 'widgets'
+//                groupId 'com.mishou.android'
+//                packaging 'aar'
+//                description 'numberMorphView for Android'
+//            }
+//        }
+//    }
+//}
+//artifacts {
+//    archives file('widgetsLibrary.aar')
+//}

@@ -49,6 +49,7 @@ dependencies {
 //    compile rootProject.ext.de
 
     compile 'com.mishou.android:common:1.0.2@aar'
+    compile 'com.mishou.android:widgets:1.0.0@aar'
 
     compile rootProject.ext.dependencies["support-v4"]
     compile rootProject.ext.dependencies["support-v7"]
@@ -67,6 +68,6 @@ dependencies {
     compile rootProject.ext.dependencies["glide"]
     compile rootProject.ext.dependencies["glide_okhttp"]
 
+
     compile project(':push_library')
-//    compile project(':common')
 }

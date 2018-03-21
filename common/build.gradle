@@ -53,59 +53,30 @@ dependencies {
 
 }
 
-//定义上传行为
 //uploadArchives {
-//
 //    repositories {
-//        //仓库基于maven
-//        repositories.mavenDeployer {
-//
-////        snapshotRepository(url: 'http://10.129.83.244:8082/nexus/content/repositories/mobile-snapshot/') {
-////            authentication(userName: 'admin', password: 'mishou123')
-////        }
-//            //配置上传的url
-//            repository(url: "http://39.106.17.189:8081/nexus/content/repositories/snapshots/") {
-//                authentication(userName: "admin", password: "mishou123")
+//        mavenDeployer {
+//            repository(
+//                    url: "${nexusUrl}/content/repositories/releases") {
+//                authentication(userName: nexusUsername, password: nexusPassword)
 //            }
-////            repository(url: "http://39.106.17.189:8081/nexus/content/repositories/mobile/") {
-////                authentication(userName: "admin", password: "mishou123")
-////            }
+//            snapshotRepository(
+//                    url: "${nexusUrl}/content/repositories/snapshots") {
+//                authentication(userName: nexusUsername, password: nexusPassword)
+//            }
 //            pom.project {
 //                name 'common'
-//                version '1.0.0'
+//                version '1.0.2'
 //                artifactId 'common'
-//                groupId 'com.mishou'
+//                groupId 'com.mishou.android'
 //                packaging 'aar'
 //                description 'numberMorphView for Android'
 //            }
 //        }
 //    }
 //}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(
-                    url: "${nexusUrl}/content/repositories/releases") {
-                authentication(userName: nexusUsername, password: nexusPassword)
-            }
-            snapshotRepository(
-                    url: "${nexusUrl}/content/repositories/snapshots") {
-                authentication(userName: nexusUsername, password: nexusPassword)
-            }
-            pom.project {
-                name 'common'
-                version '1.0.2'
-                artifactId 'common'
-                groupId 'com.mishou.android'
-                packaging 'aar'
-                description 'numberMorphView for Android'
-            }
-        }
-    }
-}
-artifacts {
-    archives file('common.aar')
-}
+//artifacts {
+//    archives file('common.aar')
+//}
 
 

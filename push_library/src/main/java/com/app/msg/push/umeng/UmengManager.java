@@ -1,6 +1,7 @@
 package com.app.msg.push.umeng;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.app.msg.push.Const;
@@ -30,13 +31,15 @@ public class UmengManager {
 
     private String TAG = "UmengManager";
 
-    public static final String ALIAS_QIFUYUN = "mishou";
+    public static final String ALIAS_DEFAULT = "MiShouNusing";
 
-    public static final int DISPLAY_NOTIFICATION_NUMBER = 3;
+    //最大展示推送数量
+    public static final int DISPLAY_NOTIFICATION_NUMBER = 10;
 
     private Context context;
     private PushAgent mPushAgent;
     private String deviceToken;
+
     private static PushInterface mPushInterface;
 
     private static UmengManager instance = null;
@@ -88,7 +91,8 @@ public class UmengManager {
                     mPushInterface.onRegister(context, device_token);
                 }
                 deviceToken = device_token;
-                Log.d(TAG, device_token);
+
+                L.d(TAG, device_token);
 
                 //设置通知栏点击效果
                 NotificationClickerHandler notificationClickerHandler = new NotificationClickerHandler();
@@ -108,7 +112,7 @@ public class UmengManager {
             @Override
             public void onFailure(String s, String s1) {
 
-                Log.d(TAG, s + "&&" + s1);
+                L.e(TAG, s + "&&" + s1);
             }
         });
     }
@@ -280,7 +284,7 @@ public class UmengManager {
             @Override
             public void onMessage(boolean b, String s) {
 
-                Log.d(TAG, "umneg add alias b ="+b+"s ="+s);
+                L.d(TAG, "umneg add alias b ="+b+"s ="+s);
             }
         });
     }
@@ -291,7 +295,7 @@ public class UmengManager {
      * @param alias
      */
     public void setAlias(String alias,String string) {
-            getPushAgent().addExclusiveAlias(alias, string, new UTrack.ICallBack() {
+            getPushAgent().addAlias(alias, string, new UTrack.ICallBack() {
                 @Override
                 public void onMessage(boolean isSuccess, String message) {
 
@@ -330,8 +334,11 @@ public class UmengManager {
         getPushAgent().setNoDisturbMode(startHour, startMinute, endHour, endMinute);
     }
 
-    public void setDebugMode(boolean isdebug) {
-        getPushAgent().setDebugMode(isdebug);
+    /**
+     * 打开debug 功能
+     */
+    public void setDebugMode(boolean isDebug) {
+        getPushAgent().setDebugMode(isDebug);
     }
 
     /**
@@ -354,5 +361,27 @@ public class UmengManager {
         });
     }
 
+
+    public void onAppStart(){
+        getPushAgent().onAppStart();
+    }
+
+    /**
+     * 设置渠道
+     */
+    public void setChannel(String channel){
+        if (TextUtils.isEmpty(channel)){
+            return;
+        }
+        getPushAgent().setMessageChannel(channel);
+    }
+
+    /**
+     * 获取注册完成之后 device token
+     * @return device token
+     */
+    public String getRegisterId(){
+        return getPushAgent().getRegistrationId();
+    }
 
 }

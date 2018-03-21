@@ -26,4 +26,21 @@ public class L {
             Log.d(TAG,msg);
         }
     }
+
+    public static void e (String tag,String msg){
+        e(tag,msg,null);
+    }
+
+    public static void e (String msg){
+        e(TAG,msg);
+    }
+
+    public static void e (Throwable t){
+        e(TAG,TAG,t);
+    }
+
+    public static void e (String tag,String msg,Throwable throwable){
+        if (debug)
+            Log.e(tag,msg,throwable);
+    }
 }
